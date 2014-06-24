@@ -5,17 +5,18 @@
 </head>
 <body>
 <form action="/pennymail/sendmail" method="post">
-	<label>RECIPIENTS</label><textarea id="recipients"></textarea>
+	<label>RECIPIENTS</label><textarea id="recipients" name="recipients">${mail.recipients}</textarea>
 	<br>
 	<label>TOPIC</label>
 	<br>
-	<input type="text" id="topic">
+	<input type="text" id="topic" name="topic" value="${mail.topic}">
 	<br>
 	<label>BODY</label>
 	<br>
-	<textarea id="message"></textarea>
+	<textarea id="message" name="message">${mail.message}</textarea>
 	<br>
 	<input type="submit" value="SEND">
 </form>
+<span id="errorMessage"><c:out value="${errorMessage}"/></span>
 </body>
 </html>
