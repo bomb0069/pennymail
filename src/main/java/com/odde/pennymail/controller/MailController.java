@@ -18,4 +18,14 @@ public class MailController {
 		return "sendmail";
 	}	
 	
+	@RequestMapping(value = "/addrecipient", method = RequestMethod.GET)
+	public String retrieveRecipient(){
+		return "addrecipient";
+	}	
+
+	@RequestMapping(value = "/addrecipient", method = RequestMethod.POST)
+	public String addRecipient(){
+		return "addrecipient";
+	}	
+
 }

@@ -18,4 +18,15 @@ public class MailControllerTest {
 		assertEquals("After user click Send button, the page should forward to sendmail view.", "sendmail", mailController.sendMail());
 	}
 
-}
+	@Test
+	public void testRetirveRecipientToReturnAddrecipientView() {
+		MailController mailController = new MailController();
+		assertEquals("The URL /addrecipient should forward to add recipient view.", "addrecipient", mailController.retrieveRecipient());
+	}
+	
+	@Test
+	public void testAddRecipientToReturnAddrecipientView() {
+		MailController mailController = new MailController();
+		assertEquals("After user click Add button, the page should forward to recipient view.", "addrecipient", mailController.addRecipient());
+	}
+}	
