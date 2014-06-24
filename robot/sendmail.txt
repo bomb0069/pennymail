@@ -1,6 +1,6 @@
 *** Settings ***
 Library             Selenium2Library
-Suite Setup         Open Browser    ${SENDMAIL_URL}
+Suite Setup         Open Sendmail Browser
 Suite Teardown      Close All Browsers
 
 *** Variables ***
@@ -22,6 +22,10 @@ Test Send Invalid Email
     Page Should Contain     แสรดด e Penny โง่ Invalid.com ใช้ไม่ได้ 
 
 *** Keywords ***
+Open Sendmail Browser
+	Open Browser                  ${SENDMAIL_URL} 
+    Wait Until Page Contains      RECIPIENTS
+
 Fill in Recipients
 	[Arguments]     ${recipients}
     Input Text      recipients      ${recipients}
