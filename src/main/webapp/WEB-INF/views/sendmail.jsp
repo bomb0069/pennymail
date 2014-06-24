@@ -15,7 +15,7 @@
 	<br>
 	<textarea id="message"></textarea>
 	<br>
-	<input type="submit" value="SEND">
+	<input id="send" type="submit" value="SEND">
 </form>
 </body>
 </html>
