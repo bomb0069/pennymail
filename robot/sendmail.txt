@@ -1,0 +1,16 @@
+*** Settings ***
+Library             Selenium2Library
+Suite Teardown      Close All Browsers
+
+*** Variables ***
+${SENDMAIL_URL}     http://earth.local/sendmail   
+
+*** Test Cases ***
+Test Send Valid Email
+    [Tags]          not_ready
+    Open Browser    ${SENDMAIL_URL}    firefox
+    Input Text      recipients         bomb@gmail.com
+    Input Text      topic              New Gadget Coming
+    Input Text      message            New Gadget arrive, Order Now !
+    Click Button    send
+
