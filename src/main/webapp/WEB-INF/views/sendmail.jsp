@@ -15,7 +15,7 @@
 	<br>
 	<textarea id="message" name="message">${mail.message}</textarea>
 	<br>
-	<input type="submit" value="SEND">
+	<input id="send" type="submit" value="SEND">
 </form>
 <span id="errorMessage"><c:out value="${errorMessage}"/></span>
 </body>
