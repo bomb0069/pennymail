@@ -37,6 +37,12 @@ public class MailServiceTest {
 		assertEmailConstructCorrectly(mailService.getSavedEmail());
 	}
 
+	@Test
+	public void nullBodyShouldBeSent() throws EmailException, IOException, MessagingException {
+		mailService.send("bomb@gmail.com", "New Gadgets", "");
+		assertEquals(" ", mailService.getSavedEmail().getMimeMessage().getContent());
+	}
+	
 	private void assertEmailConstructCorrectly(Email email) throws IOException,
 			MessagingException {
 		assertEquals("bomb@gmail.com", email.getToAddresses().get(0).toString());
