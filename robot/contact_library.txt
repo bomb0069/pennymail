@@ -1,21 +1,20 @@
 *** Settings ***
 Library             Selenium2Library
-Test Setup          Open Add Contact Browser
-Test Teardown       Close Browser
 
 *** Variables ***
-${Contact_URL}     http://earth.local:8080/pennymail/contact
+${Contact_URL}     http://localhost:8080/pennymail/contact
 
 
 *** Keywords ***
 
-Add recipient
-	[Arguments]     ${Recipients}
-	Fill in Recipients    ${Recipients}
+Add Recipient
+	[Arguments]     ${recipients}
+	Fill in Recipients    ${recipients}
 	Click Button          add
+	Everything is OK
 
 Open Add Contact Browser
-	Open Browser                  ${ADDRECIPIENT_URL} 
+	Open Browser                  ${Contact_URL} 
     Wait Until Page Contains      Recipients
     
 Fill in Recipients
