@@ -18,7 +18,11 @@
 		</tr>
 		<tr>
 		<td colspan = "2">
-			<textarea id = "recipients"  style= "overflow-y: auto;"  rows= "4">
+			<textarea readonly id = "recipients"  style= "overflow-y: auto; overflow-x: hidden"  rows= "4">
+			<c:forEach items="${recipientList.recipients}" var="recipient">
+				${recipient}
+			<br />
+			</c:forEach>
 			</textarea>
 		</td> 
 		</tr>
