@@ -8,4 +8,7 @@ public class ContactService {
 		return null;
 	}
 
+	public void add(String email) {
+	}
+
 }
