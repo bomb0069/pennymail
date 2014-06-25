@@ -11,7 +11,7 @@ import org.junit.Test;
 public class ContactServiceTest {
 
 	@Test
-	public void getRecipientList() {
+	public void getZeroRecipientList() {
 		ContactService contact = new ContactService();
 		assertEquals(0, contact.list().size());
 	}
@@ -19,7 +19,18 @@ public class ContactServiceTest {
 	@Test
 	public void shouldBeAbleToAddToTheContactList() {
 		ContactService contact = new ContactService();
-		contact.add("a@b.com");
-		assertEquals("a@b.com", contact.list().get(0));
+		contact.add("a@mail.com");
+		assertEquals("a@mail.com", contact.list().get(0));
 	}
+	
+	@Test
+	public void shouldBeAbleToAddMultipleContacts()
+	{
+		ContactService contact = new ContactService();
+		contact.add("a@mail.com");
+		contact.add("b@mail.com");
+		contact.add("c@mail.com");
+		assertEquals("cannot add multiple contact",3,contact.list().size());
+	}
+	
 }

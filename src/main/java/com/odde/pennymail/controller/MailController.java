@@ -11,7 +11,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.odde.pennymail.model.MailRequest;
 import com.odde.pennymail.service.MailService.MailService;
-import com.odde.pennymail.util.EmailTokenizer;
 import com.odde.pennymail.util.MailValidator;
 
 @Controller
@@ -34,11 +33,9 @@ public class MailController {
 		mav.setViewName("sendmail");
 		Map<String, Object> model = mav.getModel();
 		
-		EmailTokenizer emailTokenizer = new EmailTokenizer();
-		
-		for (String recipient : emailTokenizer.splitEmail(mail.getRecipients())) {
+		for (String recipient : mail.getRecipientsList()) {
 			if (!isEmailValid(recipient)) {
-				model.put("errorMessage", "ePenny");
+				model.put("errorMessage", "แสรดด e Penny โง่ " + recipient + " ใช้ไม่ได้");
 				model.put("mail", mail);
 			} else {
 				mailService.send(recipient, mail.getTopic(), mail.getMessage());
