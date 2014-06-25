@@ -65,18 +65,7 @@ public class MailControllerTest {
 	}
 	
 	@Test
-	public void testSendMailInvalidRecipientsWithErrorMessage() throws EmailException {
-		MailRequest mailReq = buildMailRequest("neung@.com","Topic1","message from penny");
-		ModelAndView mav = mailController.sendMail(mailReq);
-		
-		assertEquals("sendmail", mav.getViewName());
-		ArrayList<String> expectedErrorList = new ArrayList<String>();
-		expectedErrorList.add("แสรดด e Penny โง่ neung@.com ใช้ไม่ได้");
-		assertEquals(expectedErrorList, mav.getModel().get("errorList"));
-	}
-	
-	@Test
-	public void testSendMailInvalidRecipientsRemainMailDetails() throws EmailException {
+	public void testSendMailInvalidRecipients() throws EmailException {
 		String invalidReceipients = "invalid@gmail";
 		String topic              = "topic1";
 		String message            = "message from penny";
@@ -88,8 +77,11 @@ public class MailControllerTest {
 		assertEquals(invalidReceipients,mail.getRecipients());
 		assertEquals(topic,mail.getTopic());
 		assertEquals(message,mail.getMessage());
+		
+		ArrayList<String> expectedErrorList = new ArrayList<String>();
+		expectedErrorList.add("แสรดด e Penny โง่ " + invalidReceipients + " ใช้ไม่ได้");
+		assertEquals(expectedErrorList, mav.getModel().get("errorList"));
 	}
-	
 	
 	@Test
 	public void testSendMailToMultipleRecipients() throws EmailException {
