@@ -3,4 +3,5 @@ robot/log.html
 robot/report.html
 robot/*.png
 .settings/
-/target
+target
+.classpath
