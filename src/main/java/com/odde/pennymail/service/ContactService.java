@@ -17,7 +17,7 @@ public class ContactService {
 	}
 
 	public void add(String email) {
-		if (!email.trim().equals("") && !emaillist.contains(email.trim())) {
+		if (null != email &&!email.trim().equals("") && !emaillist.contains(email.trim())) {
 				emaillist.add(email);
 		}
 	}

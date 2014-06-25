@@ -14,6 +14,13 @@ import org.junit.Test;
 public class ContactServiceTest {
 	ContactService contact = new ContactService();
 	
+	
+	@Test
+	public void shouldBeAbleToAddToTheContactList() {
+		contact.add("a@mail.com");
+		assertEquals("a@mail.com", contact.list().get(0));
+	}
+	
 	@Test
 	public void getZeroRecipientList() {
 		assertEquals(0, contact.list().size());
@@ -26,9 +33,9 @@ public class ContactServiceTest {
 	}
 	
 	@Test
-	public void shouldBeAbleToAddToTheContactList() {
-		contact.add("a@mail.com");
-		assertEquals("a@mail.com", contact.list().get(0));
+	public void shouldNotAbleToAddEmptyContact1() {
+		contact.add(null);
+		assertEquals(0, contact.list().size());
 	}
 	
 	@Test
