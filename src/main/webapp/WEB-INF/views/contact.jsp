@@ -8,9 +8,10 @@
 	<table>
 		<tr>
 		<td>Recipients</td>
-		<td><textarea id = "addRecipients" rows= "1"></textarea></td>
+		<td><textarea id = "addRecipients" name="addRecipients" rows= "1"></textarea></td>
 		<td><input type = "submit" id="add" value = "ADD"></td> 
 		<td>
+		<c:if test="${invalidList != null}">แสรดด e Penny โง่! invalid email: </c:if>
 		<c:forEach items="${invalidList}" var="mail">
 				${mail}
 			<br />
@@ -23,7 +24,6 @@
 			<textarea readonly id = "currentRecipientsList"  style= "overflow-y: auto; overflow-x: hidden"  rows= "4">
 			<c:forEach items="${contactList}" var="contactName">
 				${contactName}
-			<br />
 			</c:forEach>
 			</textarea>
 		</td> 
