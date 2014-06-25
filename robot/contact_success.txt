@@ -6,7 +6,6 @@ Test Teardown       Close Browser
 *** Test Cases ***
 Valid Email Rule
 	[Template]     Add Recipient
-	[Tags]         not_ready
 	# --- recipients ---- 									
 	valid@email.com    
 	multiple@a.com,Roong@hotmail.com
