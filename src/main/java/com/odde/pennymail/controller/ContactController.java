@@ -35,20 +35,24 @@ public class ContactController {
 	@RequestMapping(value = "/addrecipient", method = RequestMethod.POST)
 	public ModelAndView add(@RequestParam(value = "addRecipients") String email) {
 		EmailTokenizer token = new EmailTokenizer();
-		ModelAndView modelAndView = list();
+		
 		if (email == null) {
-			return modelAndView;
+			return list();
 		}
 		String[] mails = token.splitEmail(email);
+		ArrayList<String> invalidList = new ArrayList<String>();
 		
 		for (String mail: mails) {
 			if(MailValidator.validate(mail)) {
 				this.contactService.add(mail);
 			} else {
-				ArrayList<String> invalidList = new ArrayList<String>();
-				invalidList.add(mail);
-				modelAndView.getModel().put("invalidList", invalidList);
+				invalidList.add(mail);			
 			}
+		}
+		
+		ModelAndView modelAndView = list();
+		if (invalidList.size() > 0) {
+			modelAndView.getModel().put("invalidList", invalidList);
 		}
 				
 		return modelAndView;
