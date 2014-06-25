@@ -11,6 +11,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.odde.pennymail.model.MailRequest;
 import com.odde.pennymail.service.MailService.MailService;
+import com.odde.pennymail.util.EmailTokenizer;
 import com.odde.pennymail.util.MailValidator;
 
 @Controller
@@ -32,18 +33,23 @@ public class MailController {
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("sendmail");
 		Map<String, Object> model = mav.getModel();
-		if (! isEmailValid(mail)) {
-			model.put("errorMessage", "ePenny");
-			model.put("mail", mail);
-		} else {
-			mailService.send(mail);
-			model.put("mail", new MailRequest());
+		
+		EmailTokenizer emailTokenizer = new EmailTokenizer();
+		
+		for (String recipient : emailTokenizer.splitEmail(mail.getRecipients())) {
+			if (!isEmailValid(recipient)) {
+				model.put("errorMessage", "ePenny");
+				model.put("mail", mail);
+			} else {
+				mailService.send(recipient, mail.getTopic(), mail.getMessage());
+				model.put("mail", new MailRequest());
+			}
 		}
 		return mav;
 	}
 
-	private boolean isEmailValid(MailRequest mail) {
-		return MailValidator.validate(mail.getRecipients());
+	private boolean isEmailValid(String mail) {
+		return MailValidator.validate(mail);
 	}
 
 	@RequestMapping(value = "/addrecipient", method = RequestMethod.GET)

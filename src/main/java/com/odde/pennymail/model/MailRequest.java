@@ -1,5 +1,10 @@
 package com.odde.pennymail.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import com.odde.pennymail.util.EmailTokenizer;
+
 public class MailRequest {
 	private String recipients;
 	private String topic;
@@ -34,5 +39,11 @@ public class MailRequest {
 	public void setMessage(String message) {
 		this.message = message;
 	}
+
+	public String[] getRecipientsList() {
+		EmailTokenizer emailTokenizer = new EmailTokenizer();		
+		return emailTokenizer.splitEmail(recipients);
+	}
+
 
 }
