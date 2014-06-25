@@ -44,7 +44,4 @@ public class MailServiceTest {
 		assertEquals("Sales 50% Off", email.getMimeMessage().getContent());
 	}
 	
-
-	
-	
 }
