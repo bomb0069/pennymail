@@ -80,12 +80,6 @@ public class MailControllerTest {
 	}
 	
 	
-	@Test
-	public void testAddRecipientToReturnAddrecipientView() {
-		MailController mailController = new MailController();
-		assertEquals("After user click Add button, the page should forward to recipient view.", "addrecipient", mailController.addRecipient());
-	}
-	
 	private MailRequest buildMailRequest(String recipients,String topic,String message)
 	{
 		MailRequest mailReq = new MailRequest();

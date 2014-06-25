@@ -5,6 +5,7 @@ import static org.junit.Assert.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.junit.Before;
 import org.junit.Test;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -24,12 +25,18 @@ public class ContactControllerTest {
 		}
 	}
 
-	ContactController controller = new ContactController();
-	FakeContactService service = new FakeContactService();
+	ContactController controller;
+	FakeContactService service;
+
+	@Before
+	public void setUp() {
+		controller = new ContactController();
+		service = new FakeContactService();
+		controller.setContactService(service);
+	}
 
 	@Test
 	public void listExistingContact() {
-		controller.setContactService(service);
 		ModelAndView modelAndView = controller.list();
 		assertEquals("contact", modelAndView.getViewName());
 		assertTrue(modelAndView.getModel().get("contactList") instanceof List);
@@ -37,8 +44,6 @@ public class ContactControllerTest {
 
 	@Test
 	public void addEmail() {
-		controller.setContactService(service);
-
 		ArrayList oldContactList = (ArrayList) service.contactList.clone();
 		ModelAndView modelAndView = controller.add("new@email.com");
 
