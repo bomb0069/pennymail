@@ -33,28 +33,29 @@ public class ContactController {
 	}
 
 	@RequestMapping(value = "/addrecipient", method = RequestMethod.POST)
-	public ModelAndView add(@RequestParam(value = "addRecipients") String email) {
+	public ModelAndView add(@RequestParam(value = "addRecipients") String emails) {
+		ArrayList<String> invalidList = addToContactList(emails);
+		return addInvalidListToModelAndView(invalidList);
+	}
+
+	private ArrayList<String> addToContactList(String emails) {
 		EmailTokenizer token = new EmailTokenizer();
-		
-		if (email == null) {
-			return list();
-		}
-		String[] mails = token.splitEmail(email);
 		ArrayList<String> invalidList = new ArrayList<String>();
-		
-		for (String mail: mails) {
-			if(MailValidator.validate(mail)) {
+
+		for (String mail : token.splitEmail(emails)) {
+			mail = mail.trim();
+			if (MailValidator.validate(mail)) {
 				this.contactService.add(mail);
 			} else {
-				invalidList.add(mail);			
+				invalidList.add(mail);
 			}
 		}
-		
+		return invalidList;
+	}
+
+	private ModelAndView addInvalidListToModelAndView(ArrayList<String> invalidList) {
 		ModelAndView modelAndView = list();
-		if (invalidList.size() > 0) {
-			modelAndView.getModel().put("invalidList", invalidList);
-		}
-				
+		modelAndView.getModel().put("invalidList", invalidList);
 		return modelAndView;
 	}
 

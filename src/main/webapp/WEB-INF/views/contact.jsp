@@ -12,7 +12,7 @@
 		<td><textarea id = "addRecipients" name="addRecipients" rows= "1"></textarea></td>
 		<td><input type = "submit" id="add" value = "ADD"></td> 
 		<td>
-		<c:if test="${invalidList != null}">แสรดด e Penny โง่! invalid email: </c:if>
+		<c:if test="${invalidList.size() > 0}">แสรดด e Penny โง่! invalid email: </c:if>
 		<c:forEach items="${invalidList}" var="mail">
 				${mail}
 			<br />

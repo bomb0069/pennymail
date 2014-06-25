@@ -72,13 +72,5 @@ public class ContactControllerTest {
 				"contactList");
 		assertEquals(oldContactList.size() + 2, newContactList.size());
 	}
-	
-	@Test
-	public void emptyEmail() {
-		ModelAndView modelAndView = controller.add(null);
-		
-		ArrayList newContactList = (ArrayList) modelAndView.getModel().get(
-				"contactList");
-		assertEquals(0, newContactList.size());
-	}
+
 }
