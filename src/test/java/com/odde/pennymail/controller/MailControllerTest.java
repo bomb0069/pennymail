@@ -52,6 +52,7 @@ public class MailControllerTest {
 		MailRequest mailRequest = (MailRequest)mav.getModel().get("mail");
 		assertEquals("", mailRequest.getTopic());
 		assertEquals("", mailRequest.getMessage());
+		assertEquals("", mailRequest.getRecipients());
 	}
 	
 	@Test

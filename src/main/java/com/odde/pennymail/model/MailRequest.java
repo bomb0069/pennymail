@@ -4,6 +4,12 @@ public class MailRequest {
 	private String recipients;
 	private String topic;
 	private String message;
+	
+	public MailRequest() {
+		this.topic = "";
+		this.message = "";
+		this.recipients = "";
+	}
 
 	public String getRecipients() {
 		return recipients;
@@ -28,4 +34,5 @@ public class MailRequest {
 	public void setMessage(String message) {
 		this.message = message;
 	}
+
 }
