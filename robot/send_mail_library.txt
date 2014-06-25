@@ -1,23 +1,8 @@
 *** Settings ***
 Library             Selenium2Library
-Test Setup          Open Sendmail Browser
-Test Teardown       Close Browser
 
 *** Variables ***
 ${SENDMAIL_URL}     http://earth.local:8080/pennymail/sendmail
-
-*** Test Cases ***
-
-Valid Email Should Be Send
-    [Tags]                             not_ready
-    Send Email About New Gadget To     bomb412355451244@gmail.com,max412355451244@gmail.com
-    Everything Is OK
-    
-Invalid Email Should Be Inform To Penny
-    [Tags]                             not_ready
-    Send Email About New Gadget To     bomb412355451244@gmail.com,Invalid.com,Invalid@com
-    Penny Should See Message           แสรดด e Penny โง่ Invalid.com ใช้ไม่ได้
-    Penny Should See Message           แสรดด e Penny โง่ Invalid@com ใช้ไม่ได้
 
 *** Keywords ***
 Send Email About New Gadget To
