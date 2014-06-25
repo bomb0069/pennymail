@@ -4,8 +4,9 @@ Test Setup          Open Sendmail Browser
 Test Teardown       Close Browser
 
 *** Test Cases ***
+Valid Email Rule
+	[Template]     Send Email To
+	# --- recipients ---- 									| -------- topic -------- | --- body ---
+	bomb412355451244@gmail.com,max412355451244@gmail.com      New Gadget Coming         New Gadget arrive, Order Now !
+	bomb412355451244@gmail.com                                New Gadget Coming         ${EMPTY}
 
-Valid Email Should Be Send
-    [Tags]                             not_ready
-    Send Email About New Gadget To     bomb412355451244@gmail.com,max412355451244@gmail.com
-    Everything Is OK
