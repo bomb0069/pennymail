@@ -18,9 +18,8 @@ public class ContactController {
 
 	@RequestMapping(value = "/contact", method = RequestMethod.GET)
 	public ModelAndView list() {
-		List contactList = contactService.list();
-
 		ModelAndView modelAndView = new ModelAndView("contact");
+		List contactList = contactService.list();
 		modelAndView.getModel().put("contactList", contactList);
 		return modelAndView;
 	}
@@ -32,11 +31,7 @@ public class ContactController {
 	@RequestMapping(value = "/addrecipient", method = RequestMethod.POST)
 	public ModelAndView add(String email) {
 		this.contactService.add(email);
-		ModelAndView modelAndView = new ModelAndView("contact");
-		List contactList = contactService.list();
-
-		modelAndView.getModel().put("contactList", contactList);
-		return modelAndView;
+		return list();
 	}
 
 }
