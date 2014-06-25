@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.odde.pennymail.service.ContactService;
+import com.odde.pennymail.util.EmailTokenizer;
 import com.odde.pennymail.util.MailValidator;
 
 @Controller
@@ -32,14 +33,21 @@ public class ContactController {
 
 	@RequestMapping(value = "/addrecipient", method = RequestMethod.POST)
 	public ModelAndView add(String email) {
-		this.contactService.add(email);
+		EmailTokenizer token = new EmailTokenizer();
 		ModelAndView modelAndView = list();
 		
-		if(!MailValidator.validate(email)) {
-			ArrayList<String> invalidList = new ArrayList<String>();
-			invalidList.add(email);
-			modelAndView.getModel().put("invalidList", invalidList);
+		String[] mails = token.splitEmail(email);
+		
+		for (String mail: mails) {
+			if(MailValidator.validate(mail)) {
+				this.contactService.add(mail);
+			} else {
+				ArrayList<String> invalidList = new ArrayList<String>();
+				invalidList.add(mail);
+				modelAndView.getModel().put("invalidList", invalidList);
+			}
 		}
+				
 		return modelAndView;
 	}
 

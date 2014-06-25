@@ -62,5 +62,15 @@ public class ContactControllerTest {
 		assertEquals("newemail.com",
 				((List) modelAndView.getModel().get("invalidList")).get(0));
 	}
+	
+	@Test
+	public void addMultipleEmail() {
+		ArrayList oldContactList = (ArrayList) service.contactList.clone();
+		ModelAndView modelAndView = controller.add("new@email.com,nn@email.com");
+
+		ArrayList newContactList = (ArrayList) modelAndView.getModel().get(
+				"contactList");
+		assertEquals(oldContactList.size() + 2, newContactList.size());
+	}
 
 }
