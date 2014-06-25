@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.odde.pennymail.service.ContactService;
@@ -32,7 +33,7 @@ public class ContactController {
 	}
 
 	@RequestMapping(value = "/addrecipient", method = RequestMethod.POST)
-	public ModelAndView add(String email) {
+	public ModelAndView add(@RequestParam(value = "addRecipients") String email) {
 		EmailTokenizer token = new EmailTokenizer();
 		ModelAndView modelAndView = list();
 		if (email == null) {
