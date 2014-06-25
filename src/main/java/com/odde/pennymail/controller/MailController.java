@@ -1,5 +1,8 @@
 package com.odde.pennymail.controller;
 
+import java.util.Map;
+
+import org.apache.commons.mail.EmailException;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -7,10 +10,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.odde.pennymail.model.MailRequest;
+import com.odde.pennymail.service.MailService.MailService;
 import com.odde.pennymail.util.MailValidator;
 
 @Controller
 public class MailController {
+	MailService mailService = new MailService();
 
 	@RequestMapping(value = "/sendmail", method = RequestMethod.GET)
 	public ModelAndView composeMail() {
@@ -24,13 +29,22 @@ public class MailController {
 	@RequestMapping(value = "/sendmail", method = RequestMethod.POST)
 	public ModelAndView sendMail(@ModelAttribute("mail") MailRequest mail) {
 		ModelAndView mav = new ModelAndView();
+		
 		mav.setViewName("sendmail");
+		
+		Map<String, Object> model = mav.getModel();
 		if (!MailValidator.validate(mail.getRecipients())){ 
-			mav.getModel().put("errorMessage", "ePenny");
-			mav.getModel().put("mail",mail);
+			model.put("errorMessage", "ePenny");
+			model.put("mail",mail);
 		}else{
-			mav.getModel().put("mail",new MailRequest());
-			mav.getModel().remove("errorMessage");
+			try {
+				mailService.send(mail.getRecipients(), mail.getTopic(), mail.getMessage());
+				model.remove("errorMessage");
+			} catch (EmailException e) {
+				e.printStackTrace();				
+				model.put("errorMessage", "ePenny ส่งเมลไม่ได้นะ");
+			}
+			model.put("mail",new MailRequest());
 		}
 		return mav;
 	}

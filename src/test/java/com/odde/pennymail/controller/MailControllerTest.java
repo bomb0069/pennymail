@@ -1,20 +1,31 @@
 package com.odde.pennymail.controller;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
+import org.apache.commons.mail.EmailException;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.odde.pennymail.model.MailRequest;
+import com.odde.pennymail.service.MailService.MailService;
 
 public class MailControllerTest {
 	MailController mailController;
+	
+	class MailServiceForTest extends MailService {
+		
+		@Override
+		public void send(String recipient, String topic, String body) throws EmailException {
+			// do nothing
+		}
+	}
 	
 	@Before
 	public void setup()
 	{
 		mailController = new MailController();
+		mailController.mailService = new MailServiceForTest();
 	}
 	
 	@Test
