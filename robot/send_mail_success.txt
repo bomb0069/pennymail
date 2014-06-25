@@ -1,0 +1,11 @@
+*** Settings ***
+Resource            send_mail_library.txt
+Test Setup          Open Sendmail Browser
+Test Teardown       Close Browser
+
+*** Test Cases ***
+
+Valid Email Should Be Send
+    [Tags]                             not_ready
+    Send Email About New Gadget To     bomb412355451244@gmail.com,max412355451244@gmail.com
+    Everything Is OK
