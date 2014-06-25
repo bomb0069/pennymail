@@ -5,8 +5,9 @@ Library             Selenium2Library
 ${SENDMAIL_URL}     http://earth.local:8080/pennymail/sendmail
 
 *** Keywords ***
-Send Email To
+Successfully Send Email To Recipient Workflow
 	[Arguments]                 ${recipients}     ${topic}     ${message}
+	Go To                       ${SENDMAIL_URL}
 	Fill in Recipients          ${recipients}
     Fill in Topic               ${topic}
     Fill in Message             ${message}
@@ -21,7 +22,7 @@ Send Email About New Gadget To
     Click Button                send
       
 Open Sendmail Browser
-	Open Browser                  ${SENDMAIL_URL} 
+	Open Browser                  ${SENDMAIL_URL}
     Wait Until Page Contains      RECIPIENTS
 
 Fill in Recipients

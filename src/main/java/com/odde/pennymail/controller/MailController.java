@@ -46,14 +46,4 @@ public class MailController {
 		return MailValidator.validate(mail.getRecipients());
 	}
 
-	@RequestMapping(value = "/addrecipient", method = RequestMethod.GET)
-	public String retrieveRecipient() {
-		return "addrecipient";
-	}
-
-	@RequestMapping(value = "/addrecipient", method = RequestMethod.POST)
-	public String addRecipient() {
-		return "addrecipient";
-	}
-
 }
