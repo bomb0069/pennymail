@@ -6,13 +6,23 @@ Test Teardown       Close Browser
 *** Variables ***
 ${ADDRECIPIENT_URL}     http://earth.local:8080/pennymail/addrecipient
 
-*** Test Cases ***
-
 
 *** Keywords ***
+
+Add recipient
+	[Arguments]     ${Recipients}
+	Fill in Recipients    ${Recipients}
+	Click Button          add
 
 Open Add Recipient Browser
 	Open Browser                  ${ADDRECIPIENT_URL} 
     Wait Until Page Contains      Recipients
+    
+Fill in Recipients
+	[Arguments]     ${recipients}
+    Input Text      addRecipients      ${recipients}
+    
+Everything Is OK
+    Page Should Not Contain         แสรดด e Penny โง่
     
       
