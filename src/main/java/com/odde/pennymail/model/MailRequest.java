@@ -1,8 +1,5 @@
 package com.odde.pennymail.model;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.odde.pennymail.util.EmailTokenizer;
 
 public class MailRequest {

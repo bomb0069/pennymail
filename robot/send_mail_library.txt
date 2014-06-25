@@ -6,23 +6,26 @@ ${SENDMAIL_URL}     http://earth.local:8080/pennymail/sendmail
 
 *** Keywords ***
 Successfully Send Email To Recipient Workflow
-	[Arguments]                 ${recipients}     ${topic}     ${message}
+	[Arguments]                 ${recipients}     ${topic}     ${body}
+    Send Email To Recipient     ${recipients}     ${topic}     ${body}
+    Everything Is OK
+
+Can't Send Email To Recipient Workflow
+	[Arguments]                 ${recipients}     ${topic}     ${body}      ${message}
+    Send Email To Recipient     ${recipients}     ${topic}     ${body}
+    Penny Should See Message    ${message}
+
+Send Email To Recipient
+	[Arguments]                 ${recipients}     ${topic}     ${body}
 	Go To                       ${SENDMAIL_URL}
 	Fill in Recipients          ${recipients}
     Fill in Topic               ${topic}
-    Fill in Message             ${message}
+    Fill in Message             ${body}
     Click Button                send
-    Everything Is OK
 
-Send Email About New Gadget To
-	[Arguments]                 ${recipients}
-	Fill in Recipients          ${recipients}
-    Fill in Topic               New Gadget Coming     
-    Fill in Message             New Gadget arrive, Order Now !
-    Click Button                send
-      
 Open Sendmail Browser
 	Open Browser                  ${SENDMAIL_URL}
+	Set Selenium Speed            0.5
     Wait Until Page Contains      RECIPIENTS
 
 Fill in Recipients
