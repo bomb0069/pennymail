@@ -23,6 +23,9 @@ public class MailService {
 		email.setFrom("JUACOMPE.IG@gmail.com");
 		email.addTo(recipient);
 		email.setSubject(topic);
+		if(body == null || body.equals("")) {
+			body = " ";
+		}
 		email.setMsg(body);
 		sendMail(email);
 	}

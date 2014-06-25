@@ -1,25 +1,19 @@
 *** Settings ***
 Library             Selenium2Library
-Test Setup          Open Sendmail Browser
-Test Teardown       Close Browser
 
 *** Variables ***
 ${SENDMAIL_URL}     http://earth.local:8080/pennymail/sendmail
 
-*** Test Cases ***
-
-Valid Email Should Be Send
-    [Tags]                             not_ready
-    Send Email About New Gadget To     bomb412355451244@gmail.com,max412355451244@gmail.com
-    Everything Is OK
-    
-Invalid Email Should Be Inform To Penny
-    [Tags]                             not_ready
-    Send Email About New Gadget To     bomb412355451244@gmail.com,Invalid.com,Invalid@com
-    Penny Should See Message           แสรดด e Penny โง่ Invalid.com ใช้ไม่ได้
-    Penny Should See Message           แสรดด e Penny โง่ Invalid@com ใช้ไม่ได้
-
 *** Keywords ***
+Successfully Send Email To Recipient Workflow
+	[Arguments]                 ${recipients}     ${topic}     ${message}
+	Go To                       ${SENDMAIL_URL}
+	Fill in Recipients          ${recipients}
+    Fill in Topic               ${topic}
+    Fill in Message             ${message}
+    Click Button                send
+    Everything Is OK
+
 Send Email About New Gadget To
 	[Arguments]                 ${recipients}
 	Fill in Recipients          ${recipients}
@@ -28,7 +22,7 @@ Send Email About New Gadget To
     Click Button                send
       
 Open Sendmail Browser
-	Open Browser                  ${SENDMAIL_URL} 
+	Open Browser                  ${SENDMAIL_URL}
     Wait Until Page Contains      RECIPIENTS
 
 Fill in Recipients

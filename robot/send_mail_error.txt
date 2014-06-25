@@ -1,0 +1,12 @@
+*** Settings ***
+Resource            send_mail_library.txt
+Test Setup          Open Sendmail Browser
+Test Teardown       Close Browser
+
+*** Test Cases ***
+
+Invalid Email Should Be Inform To Penny
+    [Tags]                             not_ready
+    Send Email About New Gadget To     bomb412355451244@gmail.com,Invalid.com,Invalid@com
+    Penny Should See Message           แสรดด e Penny โง่ Invalid.com ใช้ไม่ได้
+    Penny Should See Message           แสรดด e Penny โง่ Invalid@com ใช้ไม่ได้

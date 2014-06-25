@@ -7,26 +7,29 @@
 <form action="/pennymail/addrecipient" method="post">
 	<table>
 		<tr>
-		<td><textarea id = "recipients" rows= "1"></textarea></td>
+		<td>Recipients</td>
+		<td><textarea id = "addRecipients" rows= "1"></textarea></td>
 		<td><input type = "submit" id="add" value = "ADD"></td> 
 		<td>
-		<c:forEach items="${duplicateList}" var="mail">
-				${mail.duplicateNameList}
+		<c:forEach items="${invalidList}" var="mail">
+				${mail}
 			<br />
 		</c:forEach>
 		</td> 
 		</tr>
 		<tr>
+		<td>Recipients List</td>
 		<td colspan = "2">
-			<textarea readonly id = "recipients"  style= "overflow-y: auto; overflow-x: hidden"  rows= "4">
-			<c:forEach items="${recipientList.recipients}" var="recipient">
-				${recipient}
+			<textarea readonly id = "currentRecipientsList"  style= "overflow-y: auto; overflow-x: hidden"  rows= "4">
+			<c:forEach items="${contactList}" var="contactName">
+				${contactName}
 			<br />
 			</c:forEach>
 			</textarea>
 		</td> 
-		</tr>
-		
+		<td>
+		</td>
+		</tr>	
 	</table>
 </form>
 </body>
