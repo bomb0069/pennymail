@@ -22,41 +22,35 @@ public class MailController {
 		MailRequest mailreq = new MailRequest();
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("sendmail");
-		mav.getModel().put("mail",mailreq);
+		mav.getModel().put("mail", mailreq);
 		return mav;
 	}
 
 	@RequestMapping(value = "/sendmail", method = RequestMethod.POST)
-	public ModelAndView sendMail(@ModelAttribute("mail") MailRequest mail) {
+	public ModelAndView sendMail(@ModelAttribute("mail") MailRequest mail)
+			throws EmailException {
 		ModelAndView mav = new ModelAndView();
-		
 		mav.setViewName("sendmail");
-		
 		Map<String, Object> model = mav.getModel();
-		if (!MailValidator.validate(mail.getRecipients())){ 
+		if (! isEmailValid(mail)) {
 			model.put("errorMessage", "ePenny");
-			model.put("mail",mail);
-		}else{
-			try {
-				mailService.send(mail.getRecipients(), mail.getTopic(), mail.getMessage());
-				model.remove("errorMessage");
-			} catch (EmailException e) {
-				e.printStackTrace();				
-				model.put("errorMessage", "ePenny ส่งเมลไม่ได้นะ");
-			}
-			model.put("mail",new MailRequest());
+			model.put("mail", mail);
 		}
 		return mav;
 	}
-	
+
+	private boolean isEmailValid(MailRequest mail) {
+		return MailValidator.validate(mail.getRecipients());
+	}
+
 	@RequestMapping(value = "/addrecipient", method = RequestMethod.GET)
-	public String retrieveRecipient(){
+	public String retrieveRecipient() {
 		return "addrecipient";
-	}	
+	}
 
 	@RequestMapping(value = "/addrecipient", method = RequestMethod.POST)
-	public String addRecipient(){
+	public String addRecipient() {
 		return "addrecipient";
-	}	
+	}
 
 }

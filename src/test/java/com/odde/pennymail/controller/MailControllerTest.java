@@ -16,7 +16,7 @@ public class MailControllerTest {
 	class MailServiceForTest extends MailService {
 		
 		@Override
-		public void send(String recipient, String topic, String body) throws EmailException {
+		public void send(MailRequest mail) throws EmailException {
 			// do nothing
 		}
 	}
@@ -35,7 +35,7 @@ public class MailControllerTest {
 	}
 	
 	@Test
-	public void testSendMailSuccess() {
+	public void testSendMailSuccess() throws EmailException {
 		MailRequest mailReq = buildMailRequest("neung@gmail.com","Topic1","message from penny");
 		ModelAndView mav = mailController.sendMail(mailReq);
 		
@@ -44,7 +44,7 @@ public class MailControllerTest {
 	}
 	
 	@Test
-	public void testSendMailInvalidRecipientsWithErrorMessage() {
+	public void testSendMailInvalidRecipientsWithErrorMessage() throws EmailException {
 		MailRequest mailReq = buildMailRequest("neung@.com","Topic1","message from penny");
 		ModelAndView mav = mailController.sendMail(mailReq);
 		
@@ -53,7 +53,7 @@ public class MailControllerTest {
 	}
 	
 	@Test
-	public void testSendMailInvalidRecipientsRemainMailDetails() {
+	public void testSendMailInvalidRecipientsRemainMailDetails() throws EmailException {
 		String invalidReceipients = "invalid@gmail";
 		String topic              = "topic1";
 		String message            = "message from penny";
