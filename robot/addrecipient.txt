@@ -1,0 +1,18 @@
+*** Settings ***
+Library             Selenium2Library
+Test Setup          Open Add Recipient Browser
+Test Teardown       Close Browser
+
+*** Variables ***
+${ADDRECIPIENT_URL}     http://earth.local:8080/pennymail/addrecipient
+
+*** Test Cases ***
+
+
+*** Keywords ***
+
+Open Add Recipient Browser
+	Open Browser                  ${ADDRECIPIENT_URL} 
+    Wait Until Page Contains      Recipients
+    
+      
