@@ -47,8 +47,12 @@ public class MailControllerTest {
 		ModelAndView mav = mailController.sendMail(mailReq);
 		
 		assertEquals(true, mailService.isSent());
-		assertEquals("After user click Send button, the page should forward to sendmail view.", "sendmail", mav.getViewName());
-		assertEquals("When mail send success, there is no the error message", false, mav.getModel().containsKey("errorMessage"));
+		assertEquals("sendmail", mav.getViewName());
+		assertEquals(false, mav.getModel().containsKey("errorMessage"));
+		MailRequest mailRequest = (MailRequest)mav.getModel().get("mail");
+		assertEquals("", mailRequest.getTopic());
+		assertEquals("", mailRequest.getMessage());
+		assertEquals("", mailRequest.getRecipients());
 	}
 	
 	@Test
