@@ -56,6 +56,18 @@ public class MailControllerTest {
 		assertEquals("When mail send fail, message should be "+message, message,mail.getMessage());
 	}
 	
+	@Test
+	public void testRetirveRecipientToReturnAddrecipientView() {
+		MailController mailController = new MailController();
+		assertEquals("The URL /addrecipient should forward to add recipient view.", "addrecipient", mailController.retrieveRecipient());
+	}
+	
+	@Test
+	public void testAddRecipientToReturnAddrecipientView() {
+		MailController mailController = new MailController();
+		assertEquals("After user click Add button, the page should forward to recipient view.", "addrecipient", mailController.addRecipient());
+	}
+	
 	private MailRequest buildMailRequest(String recipients,String topic,String message)
 	{
 		MailRequest mailReq = new MailRequest();
@@ -64,5 +76,4 @@ public class MailControllerTest {
 		mailReq.setMessage(message);
 		return mailReq;
 	}
-
-}
+}	
