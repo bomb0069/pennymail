@@ -1,53 +1,32 @@
 *** Settings ***
 Library             Selenium2Library
-Suite Setup         Open Sendmail Browser
-Suite Teardown      Close All Browsers
+Test Setup          Open Sendmail Browser
+Test Teardown       Close Browser
 
 *** Variables ***
 ${SENDMAIL_URL}     http://earth.local:8080/pennymail/sendmail
 
 *** Test Cases ***
-Test Send Valid Email
-    Fill in Recipients          bomb412355451244@gmail.com
-    Fill in Topic               New Gadget Coming     
-    Fill in Message             New Gadget arrive, Order Now !
-    Click Button                send
-    Page Should Not Contain     แสรดด e Penny โง่
 
-Test Send Invalid Email
-    [Tags]                  not_ready
-    Fill in Recipients      Invalid.com
-    Fill in Topic           New Gadget Coming     
-    Fill in Message         New Gadget arrive, Order Now !
-    Click Button            send
-    Page Should Contain     แสรดด e Penny โง่ Invalid.com ใช้ไม่ได้
+Valid Email Should Be Send
+    [Tags]                             not_ready
+    Send Email About New Gadget To     bomb412355451244@gmail.com,max412355451244@gmail.com
+    Everything Is OK
     
-Test Send multiple valid Email
-    [Tags]                      not_ready
-    Fill in Recipients          bomb412355451244@gmail.com,max412355451244@gmail.com
-    Fill in Topic               New Gadget Coming     
-    Fill in Message             New Gadget arrive, Order Now !
-    Click Button                send
-    Page Should Not Contain     แสรดด e Penny โง่ 
-
-Test Send multiple Email with invalid Email
-    [Tags]                      not_ready
-    Fill in Recipients          bomb412355451244@gmail.com,Invalid.com
-    Fill in Topic               New Gadget Coming     
-    Fill in Message             New Gadget arrive, Order Now !
-    Click Button                send
-    Page Should Contain         แสรดด e Penny โง่ Invalid.com ใช้ไม่ได้
-
-Test Send multiple invalid Email
-    [Tags]                      not_ready
-    Fill in Recipients          Invalid@com,Invalid.com
-    Fill in Topic               New Gadget Coming     
-    Fill in Message             New Gadget arrive, Order Now !
-    Click Button                send
-    Page Should Contain         แสรดด e Penny โง่ Invalid.com ใช้ไม่ได้
-    Page Should Contain         แสรดด e Penny โง่ Invalid@com ใช้ไม่ได้
+Invalid Email Should Be Inform To Penny
+    [Tags]                             not_ready
+    Send Email About New Gadget To     bomb412355451244@gmail.com,Invalid.com,Invalid@com
+    Penny Should See Message           แสรดด e Penny โง่ Invalid.com ใช้ไม่ได้
+    Penny Should See Message           แสรดด e Penny โง่ Invalid@com ใช้ไม่ได้
 
 *** Keywords ***
+Send Email About New Gadget To
+	[Arguments]                 ${recipients}
+	Fill in Recipients          ${recipients}
+    Fill in Topic               New Gadget Coming     
+    Fill in Message             New Gadget arrive, Order Now !
+    Click Button                send
+      
 Open Sendmail Browser
 	Open Browser                  ${SENDMAIL_URL} 
     Wait Until Page Contains      RECIPIENTS
@@ -64,3 +43,9 @@ Fill in Message
 	[Arguments]     ${message}
     Input Text      message         ${message}
 
+Penny Should See Message
+    [Arguments]     ${message}
+    Page Should Contain             ${message}
+    
+Everything Is OK
+    Page Should Not Contain         แสรดด e Penny โง่
