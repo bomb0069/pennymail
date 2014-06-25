@@ -1,20 +1,31 @@
 package com.odde.pennymail.controller;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
+import org.apache.commons.mail.EmailException;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.odde.pennymail.model.MailRequest;
+import com.odde.pennymail.service.MailService.MailService;
 
 public class MailControllerTest {
 	MailController mailController;
+	
+	class MailServiceForTest extends MailService {
+		
+		@Override
+		public void send(MailRequest mail) throws EmailException {
+			// do nothing
+		}
+	}
 	
 	@Before
 	public void setup()
 	{
 		mailController = new MailController();
+		mailController.mailService = new MailServiceForTest();
 	}
 	
 	@Test
@@ -24,7 +35,7 @@ public class MailControllerTest {
 	}
 	
 	@Test
-	public void testSendMailSuccess() {
+	public void testSendMailSuccess() throws EmailException {
 		MailRequest mailReq = buildMailRequest("neung@gmail.com","Topic1","message from penny");
 		ModelAndView mav = mailController.sendMail(mailReq);
 		
@@ -33,7 +44,7 @@ public class MailControllerTest {
 	}
 	
 	@Test
-	public void testSendMailInvalidRecipientsWithErrorMessage() {
+	public void testSendMailInvalidRecipientsWithErrorMessage() throws EmailException {
 		MailRequest mailReq = buildMailRequest("neung@.com","Topic1","message from penny");
 		ModelAndView mav = mailController.sendMail(mailReq);
 		
@@ -42,7 +53,7 @@ public class MailControllerTest {
 	}
 	
 	@Test
-	public void testSendMailInvalidRecipientsRemainMailDetails() {
+	public void testSendMailInvalidRecipientsRemainMailDetails() throws EmailException {
 		String invalidReceipients = "invalid@gmail";
 		String topic              = "topic1";
 		String message            = "message from penny";
