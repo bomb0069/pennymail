@@ -22,9 +22,8 @@
 		<td>Recipients List</td>
 		<td colspan = "2">
 			<textarea readonly id = "currentRecipientsList"  style= "overflow-y: auto; overflow-x: hidden"  rows= "4">
-			<c:forEach items="${contactList}" var="contactName">
-				${contactName}
-			</c:forEach>
+<c:forEach items="${contactList}" var="contactName">${contactName}
+</c:forEach>
 			</textarea>
 		</td> 
 		<td>
