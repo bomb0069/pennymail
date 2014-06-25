@@ -35,7 +35,9 @@ public class ContactController {
 	public ModelAndView add(String email) {
 		EmailTokenizer token = new EmailTokenizer();
 		ModelAndView modelAndView = list();
-		
+		if (email == null) {
+			return modelAndView;
+		}
 		String[] mails = token.splitEmail(email);
 		
 		for (String mail: mails) {
