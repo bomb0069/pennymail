@@ -35,6 +35,8 @@ public class MailController {
 		if (! isEmailValid(mail)) {
 			model.put("errorMessage", "ePenny");
 			model.put("mail", mail);
+		} else {
+			mailService.send(mail);
 		}
 		return mav;
 	}

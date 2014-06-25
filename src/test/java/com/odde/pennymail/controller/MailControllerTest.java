@@ -12,12 +12,18 @@ import com.odde.pennymail.service.MailService.MailService;
 
 public class MailControllerTest {
 	MailController mailController;
-	
+	MailServiceForTest mailService;
 	class MailServiceForTest extends MailService {
-		
+		boolean sent = false;
+		public boolean isSent() {
+			return sent;
+		}
+		public void setSent(boolean sent) {
+			this.sent = sent;
+		}
 		@Override
 		public void send(MailRequest mail) throws EmailException {
-			// do nothing
+			this.sent = true;
 		}
 	}
 	
@@ -25,7 +31,8 @@ public class MailControllerTest {
 	public void setup()
 	{
 		mailController = new MailController();
-		mailController.mailService = new MailServiceForTest();
+		mailService = new MailServiceForTest();
+		mailController.mailService = mailService;
 	}
 	
 	@Test
@@ -39,6 +46,7 @@ public class MailControllerTest {
 		MailRequest mailReq = buildMailRequest("neung@gmail.com","Topic1","message from penny");
 		ModelAndView mav = mailController.sendMail(mailReq);
 		
+		assertEquals(true, mailService.isSent());
 		assertEquals("After user click Send button, the page should forward to sendmail view.", "sendmail", mav.getViewName());
 		assertEquals("When mail send success, there is no the error message", false, mav.getModel().containsKey("errorMessage"));
 	}
