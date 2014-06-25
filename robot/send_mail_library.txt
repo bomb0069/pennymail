@@ -5,6 +5,14 @@ Library             Selenium2Library
 ${SENDMAIL_URL}     http://earth.local:8080/pennymail/sendmail
 
 *** Keywords ***
+Send Email To
+	[Arguments]                 ${recipients}     ${topic}     ${message}
+	Fill in Recipients          ${recipients}
+    Fill in Topic               ${topic}
+    Fill in Message             ${message}
+    Click Button                send
+    Everything Is OK
+
 Send Email About New Gadget To
 	[Arguments]                 ${recipients}
 	Fill in Recipients          ${recipients}
