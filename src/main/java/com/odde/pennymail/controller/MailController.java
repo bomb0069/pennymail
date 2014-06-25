@@ -37,6 +37,9 @@ public class MailController {
 			model.put("mail", mail);
 		} else {
 			mailService.send(mail);
+			MailRequest mailRequest = new MailRequest();
+			mailRequest.setTopic("");
+			model.put("mail", mailRequest);
 		}
 		return mav;
 	}
