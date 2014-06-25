@@ -5,7 +5,6 @@ import org.apache.commons.mail.Email;
 import org.apache.commons.mail.EmailException;
 import org.apache.commons.mail.SimpleEmail;
 
-import com.odde.pennymail.model.MailRequest;
 
 public class MailService {
 
@@ -33,8 +32,5 @@ public class MailService {
 		email.send();
 	}
 
-	public void send(MailRequest mail) throws EmailException {
-		send(mail.getRecipients(), mail.getTopic(), mail.getMessage());
-	}
 
 }

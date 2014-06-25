@@ -32,18 +32,21 @@ public class MailController {
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("sendmail");
 		Map<String, Object> model = mav.getModel();
-		if (! isEmailValid(mail)) {
-			model.put("errorMessage", "ePenny");
-			model.put("mail", mail);
-		} else {
-			mailService.send(mail);
-			model.put("mail", new MailRequest());
+		
+		for (String recipient : mail.getRecipientsList()) {
+			if (!isEmailValid(recipient)) {
+				model.put("errorMessage", "แสรดด e Penny โง่ " + recipient + " ใช้ไม่ได้");
+				model.put("mail", mail);
+			} else {
+				mailService.send(recipient, mail.getTopic(), mail.getMessage());
+				model.put("mail", new MailRequest());
+			}
 		}
 		return mav;
 	}
 
-	private boolean isEmailValid(MailRequest mail) {
-		return MailValidator.validate(mail.getRecipients());
+	private boolean isEmailValid(String mail) {
+		return MailValidator.validate(mail);
 	}
 
 }
