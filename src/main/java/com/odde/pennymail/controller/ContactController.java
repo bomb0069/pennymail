@@ -1,5 +1,6 @@
 package com.odde.pennymail.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.odde.pennymail.service.ContactService;
+import com.odde.pennymail.util.MailValidator;
 
 @Controller
 public class ContactController {
@@ -31,7 +33,14 @@ public class ContactController {
 	@RequestMapping(value = "/addrecipient", method = RequestMethod.POST)
 	public ModelAndView add(String email) {
 		this.contactService.add(email);
-		return list();
+		ModelAndView modelAndView = list();
+		
+		if(!MailValidator.validate(email)) {
+			ArrayList<String> invalidList = new ArrayList<String>();
+			invalidList.add(email);
+			modelAndView.getModel().put("invalidList", invalidList);
+		}
+		return modelAndView;
 	}
 
 }

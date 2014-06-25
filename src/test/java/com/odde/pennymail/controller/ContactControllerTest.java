@@ -54,4 +54,13 @@ public class ContactControllerTest {
 
 	}
 
+	@Test
+	public void getErrorForAddingInvalidEmail() {
+		ModelAndView modelAndView = controller.add("newemail.com");
+
+		assertEquals("contact", modelAndView.getViewName());
+		assertEquals("newemail.com",
+				((List) modelAndView.getModel().get("invalidList")).get(0));
+	}
+
 }
