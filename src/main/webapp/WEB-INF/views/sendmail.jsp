@@ -18,6 +18,8 @@
 	<br>
 	<input id="send" type="submit" value="SEND">
 </form>
-<span id="errorMessage"><c:out value="${errorMessage}"/></span>
+<c:forEach items="${errorList}" var="errorMessage">
+	<span>${errorMessage}</span><br/>
+</c:forEach>
 </body>
 </html>
