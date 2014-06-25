@@ -29,25 +29,22 @@ public class MailServiceTest {
 			return savedEmail;
 		}
 	}
+	MailServiceForTest mailService = new MailServiceForTest();
 
 	@Test
-	public void recipientSholdBeSetAsToAddress() throws EmailException {
-		MailServiceForTest mailService = new MailServiceForTest();
+	public void recipientSholdBeSetAsToAddress() throws EmailException, IOException, MessagingException {
 		mailService.send("bomb@gmail.com", "New Gadgets", "Sales 50% Off");
-		assertEquals("bomb@gmail.com", mailService.getSavedEmail().getToAddresses().get(0).toString());
+		assertEmailConstructCorrectly(mailService.getSavedEmail());
+	}
+
+	private void assertEmailConstructCorrectly(Email email) throws IOException,
+			MessagingException {
+		assertEquals("bomb@gmail.com", email.getToAddresses().get(0).toString());
+		assertEquals("New Gadgets", email.getSubject());
+		assertEquals("Sales 50% Off", email.getMimeMessage().getContent());
 	}
 	
-	@Test
-	public void topicSholdBeSetAsSubject() throws EmailException {
-		MailServiceForTest mailService = new MailServiceForTest();
-		mailService.send("bomb@gmail.com", "New Gadgets", "Sales 50% Off");
-		assertEquals("New Gadgets", mailService.getSavedEmail().getSubject());
-	}
 
-	@Test
-	public void bodySholdBeSetAsMessage() throws EmailException, IOException, MessagingException {
-		MailServiceForTest mailService = new MailServiceForTest();;
-		mailService.send("bomb@gmail.com", "New Gadgets", "Sales 0% Off");
-		assertEquals("Sales 0% Off", mailService.getSavedEmail().getMimeMessage().getContent());
-	}
+	
+	
 }
