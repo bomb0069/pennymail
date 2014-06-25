@@ -51,6 +51,7 @@ public class MailControllerTest {
 		assertEquals(false, mav.getModel().containsKey("errorMessage"));
 		MailRequest mailRequest = (MailRequest)mav.getModel().get("mail");
 		assertEquals("", mailRequest.getTopic());
+		assertEquals("", mailRequest.getMessage());
 	}
 	
 	@Test
