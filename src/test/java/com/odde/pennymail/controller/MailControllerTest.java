@@ -2,6 +2,9 @@ package com.odde.pennymail.controller;
 
 import static org.junit.Assert.assertEquals;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.apache.commons.mail.EmailException;
 import org.junit.Before;
 import org.junit.Test;
@@ -14,16 +17,21 @@ public class MailControllerTest {
 	MailController mailController;
 	MailServiceForTest mailService;
 	class MailServiceForTest extends MailService {
-		boolean sent = false;
+		List<String> sentRecipientsList = new ArrayList<String>();
+		
 		public boolean isSent() {
-			return sent;
-		}
-		public void setSent(boolean sent) {
-			this.sent = sent;
+			return getSentCount() > 0;
 		}
 		@Override
-		public void send(MailRequest mail) throws EmailException {
-			this.sent = true;
+		public void send(String recipient, String topic, String body) throws EmailException {
+			sentRecipientsList.add(recipient);
+		}
+		public int getSentCount() {
+			return sentRecipientsList.size();
+		}
+		public String getRecipientAtIndex(int i)
+		{
+			return sentRecipientsList.get(i);
 		}
 	}
 	
@@ -80,6 +88,19 @@ public class MailControllerTest {
 	}
 	
 	
+	@Test
+	public void testSendMailToMultipleRecipients() throws EmailException {
+		String multipleRecipients = "valid@gmail.com,valid2@gmail.com";
+		String topic              = "topic1";
+		String message            = "message from penny";
+		MailRequest mailReq = buildMailRequest(multipleRecipients,topic,message);
+		ModelAndView mav = mailController.sendMail(mailReq);
+		assertEquals(2,this.mailService.getSentCount());
+		assertEquals("valid@gmail.com",this.mailService.getRecipientAtIndex(0));
+		assertEquals("valid2@gmail.com",this.mailService.getRecipientAtIndex(1));
+		
+	}
+	
 	private MailRequest buildMailRequest(String recipients,String topic,String message)
 	{
 		MailRequest mailReq = new MailRequest();
@@ -88,4 +109,5 @@ public class MailControllerTest {
 		mailReq.setMessage(message);
 		return mailReq;
 	}
+	
 }	
