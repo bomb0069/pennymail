@@ -2,7 +2,7 @@
 Library             Selenium2Library
 
 *** Variables ***
-${Contact_URL}     http://localhost:8080/pennymail/contact
+${Contact_URL}     http://earth.local:8080/pennymail/contact
 
 
 *** Keywords ***
