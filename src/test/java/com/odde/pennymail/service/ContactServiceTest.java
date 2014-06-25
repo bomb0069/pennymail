@@ -1,19 +1,18 @@
 package com.odde.pennymail.service;
 
 import static org.junit.Assert.*;
-
 import java.util.ArrayList;
 import java.util.List;
-
-import org.junit.After;
-import org.junit.AfterClass;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class ContactServiceTest {
-	ContactService contact = new ContactService();
+	ContactService contact;
 	
+	@Before
+	public void setUp() {
+		contact = new ContactService();
+	}
 	
 	@Test
 	public void shouldBeAbleToAddToTheContactList() {
