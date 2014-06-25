@@ -43,6 +43,7 @@ public class ContactController {
 		ArrayList<String> invalidList = new ArrayList<String>();
 
 		for (String mail : token.splitEmail(emails)) {
+			mail = mail.trim();
 			if (MailValidator.validate(mail)) {
 				this.contactService.add(mail);
 			} else {
