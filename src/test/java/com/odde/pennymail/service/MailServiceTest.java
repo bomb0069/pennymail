@@ -38,8 +38,14 @@ public class MailServiceTest {
 	}
 
 	@Test
-	public void nullBodyShouldBeSent() throws EmailException, IOException, MessagingException {
+	public void blankBodyShouldBeSent() throws EmailException, IOException, MessagingException {
 		mailService.send("bomb@gmail.com", "New Gadgets", "");
+		assertEquals(" ", mailService.getSavedEmail().getMimeMessage().getContent());
+	}
+	
+	@Test
+	public void nullBodyShouldBeSent() throws EmailException, IOException, MessagingException {
+		mailService.send("bomb@gmail.com", "New Gadgets", null);
 		assertEquals(" ", mailService.getSavedEmail().getMimeMessage().getContent());
 	}
 	
