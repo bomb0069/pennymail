@@ -69,7 +69,7 @@ public class MailControllerTest {
 		ModelAndView mav = mailController.sendMail(mailReq);
 		
 		assertEquals("After user click Send button, the page should forward to sendmail view.", "sendmail", mav.getViewName());
-		assertEquals("When mail send fail, the error message shoule be ePenny", "ePenny", mav.getModel().get("errorMessage"));
+		assertEquals("When mail send fail, the error message shoule be ePenny", "แสรดด e Penny โง่ neung@.com ใช้ไม่ได้", mav.getModel().get("errorMessage"));
 	}
 	
 	@Test
@@ -94,7 +94,7 @@ public class MailControllerTest {
 		String topic              = "topic1";
 		String message            = "message from penny";
 		MailRequest mailReq = buildMailRequest(multipleRecipients,topic,message);
-		ModelAndView mav = mailController.sendMail(mailReq);
+		mailController.sendMail(mailReq);
 		assertEquals(2,this.mailService.getSentCount());
 		assertEquals("valid@gmail.com",this.mailService.getRecipientAtIndex(0));
 		assertEquals("valid2@gmail.com",this.mailService.getRecipientAtIndex(1));
