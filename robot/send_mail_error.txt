@@ -6,8 +6,9 @@ Test Teardown       Close Browser
 *** Test Cases ***
 Can't Send Email Rule
 	[Template]      Can't Send Email To Recipient Workflow
-	[Tags]          not_ready
 	#------------------------------------------------------|------------------------|---------------------------------------|---------------------------------|
 	#                     recipients                       |          topic         |                  body                 |          penny will see         |
 	#------------------------------------------------------|------------------------|---------------------------------------|---------------------------------|
 	 Invalid.com                                            New Gadget Coming         New Gadget arrive, Order Now !         แสรดด e Penny โง่ Invalid.com ใช้ไม่ได้
+	 Invalid.com                                            ${EMPTY}                  New Gadget arrive, Order Now !         e Penny โง่ เดี๋ยวโดนแบนหรอก!
+	 
