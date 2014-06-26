@@ -11,4 +11,10 @@ Can't Send Email Rule
 	#------------------------------------------------------|------------------------|---------------------------------------|---------------------------------|
 	 Invalid.com                                            New Gadget Coming         New Gadget arrive, Order Now !         แสรดด e Penny โง่ Invalid.com ใช้ไม่ได้
 	 Invalid.com                                            ${EMPTY}                  New Gadget arrive, Order Now !         e Penny โง่ เดี๋ยวโดนแบนหรอก!
-	 
+
+Popup Message Rule
+    [Template]	    Popup Error Message Workflow
+	#------------------------------------------------------|------------------------|---------------------------------------|---------------------------------|
+	#                     recipients                       |          topic         |                  body                 |          penny will not see     |
+	#------------------------------------------------------|------------------------|---------------------------------------|---------------------------------|
+	 Invalid.com                                            ${EMPTY}                  New Gadget arrive, Order Now !         e Penny โง่ เดี๋ยวโดนแบนหรอก!
