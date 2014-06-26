@@ -21,12 +21,22 @@ class check_mail:
             raise AssertionError("No mail found")       
 
     def should_receive_new_mail(self, topic, expect):
-        response, item = self.mailbox.search(None, '(FROM "juacompe.ig@gmail.com" BCC "penny.inspectorgadget@gmail.com" SUBJECT "%s")' % topic)
+        response, item = self.mailbox.search(None, '(UNSEEN FROM "juacompe.ig@gmail.com" SUBJECT "%s")' % topic)
         actual = len(item[0].split())
+        
+        for mail_id in item[0].split():
+            self.mailbox.store(mail_id, '+FLAGS', '\\Seen')
 
-        if actual != expect:
+        if int(actual) != int(expect):
             raise AssertionError('Expect mail count %s but was %s' % (expect, actual))     
  
+    def delete_mail_with_topic(self, topic):
+        response, item = self.mailbox.search(None, '(UNSEEN FROM "juacompe.ig@gmail.com" SUBJECT "%s")' % topic)
+        
+        for mail_id in item[0].split():
+            self.mailbox.store(mail_id, '+FLAGS', '\\Deleted')
+            
+        self.mailbox.expunge()
  
     def close_mailbox(self):
         self.mailbox.close() 
