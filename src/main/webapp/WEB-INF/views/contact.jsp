@@ -22,7 +22,7 @@
 			</tr>
 			<tr>
 				<td>Recipients List</td>
-				<td colspan="2"><select multiple="multiple" >
+				<td colspan="2"><select id="currentRecipientsList" multiple="multiple" >
 <c:forEach items="${contactList}" var="contactName"><option value='${contactName}' onclick='showAttribute({"email": "penny@gmail.com", "attributes": [{"key": "Firstname", "value": "Penny"}]})'>${contactName}</option>
 </c:forEach>
 			</select></td>
