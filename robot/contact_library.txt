@@ -10,7 +10,7 @@ ${Contact_URL}     ${PENNYMAIL_URL}/contact
 Add Recipients Workflow
 	[Arguments]        ${recipients}
 	Add Recipients     ${recipients}
-	All Recipients Should Be Added Into List Without Errors
+	All Recipients Should Be Added Into List Without Errors             ${recipients}
 	
 Add Invalid Recipients Workflow
 	[Arguments]        ${recipients}
@@ -25,6 +25,7 @@ Add Recipients
 	Click Button          add
 	
 All Recipients Should Be Added Into List Without Errors
+	[Arguments]        ${recipients}
     Page Should No Error Message
     ${recipient_list} =     Split String    ${recipients}    ,
     ${length} =             Get Length      ${recipient_list}
