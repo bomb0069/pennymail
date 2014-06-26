@@ -75,17 +75,15 @@ public class MailServiceTest {
 			}
 		};
 		mailService.send("bomb@gmail.com", "หัวข้อ", "ข้อความ");
-		assertEquals("bomb@gmail.com", email.getToAddresses().get(0).toString());
+		assertEquals("bomb@gmail.com", email.getToAddresses().get(0).getAddress());
 		assertEquals("หัวข้อ", email.getSubject());
 		assertEquals("ข้อความ", email.getMimeMessage().getContent());
-		assertEquals("UTF-8", email.getCharset());
 	}
 	
 	private void assertEmailConstructCorrectly(Email email) throws IOException,
 			MessagingException {
-		assertEquals("bomb@gmail.com", email.getToAddresses().get(0).toString());
+		assertEquals("bomb@gmail.com", email.getToAddresses().get(0).getAddress());
 		assertEquals("New Gadgets", email.getSubject());
 		assertEquals("Sales 50% Off", email.getMimeMessage().getContent());
 	}
-	
 }

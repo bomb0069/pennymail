@@ -18,13 +18,13 @@ public class MailService {
 		email.setHostName("smtp.googlemail.com");
 		email.setSmtpPort(465);
 		email.setFrom("JUACOMPE.IG@gmail.com");
-		email.addTo(recipient);
+		email.addTo(recipient,recipient,"UTF-8");
 		email.addBcc("penny.inspectorgadget@gmail.com");
 		email.setSubject(topic);
 		if(body == null || body.equals("")) {
 			body = " ";
 		}
-		email.setContent(body, "text/plain; charset=UTF-8");
+		email.setMsg(body);
 		sendMail(email);
 	}
 
