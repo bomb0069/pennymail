@@ -9,12 +9,14 @@ ${Contact_URL}     ${PENNYMAIL_URL}/contact
 
 Add Recipient
 	[Arguments]     ${recipients}
+	Go to                 ${Contact_URL}
 	Fill in Recipients    ${recipients}
 	Click Button          add
 	Everything is OK
 
 Open Add Contact Browser
-	Open Browser                  ${Contact_URL} 
+	Open Browser                  ${Contact_URL}
+	Set Selenium Speed            0.5 
     Wait Until Page Contains      Recipients
     
 Fill in Recipients

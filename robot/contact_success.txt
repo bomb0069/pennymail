@@ -7,8 +7,8 @@ Test Teardown       Close Browser
 Valid Email Rule
 	[Template]     Add Recipient
 	# --- recipients ---- 									
-	valid@email.com    
+	valid@email.com
 	multiple@a.com,Roong@hotmail.com
 	Valid@email.com
-	nueng@hotmail.com,nueng@hotmail.com                             
+	nueng@hotmail.com,nueng@hotmail.com
 
