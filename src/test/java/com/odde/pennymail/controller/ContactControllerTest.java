@@ -4,6 +4,8 @@ import static org.junit.Assert.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -64,11 +66,10 @@ public class ContactControllerTest {
 	}
 	
 	@Test
-	public void addAttributeToContact() {
-		ModelAndView modelAndView = controller.addAttributeToContact("a@mail.com","attribute");
-		
+	public void showAttribute() throws Exception {
+		ModelAndView modelAndView = controller.list();
 		assertEquals("contact", modelAndView.getViewName());
-		
+		TreeMap<String, String> emailAttributeMap = (TreeMap<String,String>)modelAndView.getModel().get("emailAttributeMap");
+		assertTrue(emailAttributeMap instanceof Map);
 	}
-
 }
