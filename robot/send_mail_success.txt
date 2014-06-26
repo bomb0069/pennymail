@@ -7,7 +7,6 @@ Test Teardown       Close Browser
 *** Test Cases ***
 Send Mail To Recipient
 	[Template]     Successfully Send Email To Recipient Workflow  
-	[Tags]         ignore
 	#-------------------------------|----------------------|-------------------------------------|-------------------------|
 	#       recipients              |          topic       |                  body               |   received mail count   |   
 	#-------------------------------|----------------------|-------------------------------------|-------------------------|
