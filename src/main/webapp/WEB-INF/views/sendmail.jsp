@@ -1,4 +1,5 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ page contentType="text/html; charset=utf-8" %>
 <html>
 <head>
 	<title>Penny Mail</title>
@@ -17,6 +18,8 @@
 	<br>
 	<input id="send" type="submit" value="SEND">
 </form>
-<span id="errorMessage"><c:out value="${errorMessage}"/></span>
+<c:forEach items="${errorList}" var="errorMessage">
+	<span>${errorMessage}</span><br/>
+</c:forEach>
 </body>
 </html>

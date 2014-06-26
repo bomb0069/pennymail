@@ -1,8 +1,8 @@
 *** Settings ***
-Library             Selenium2Library
+Resource           environment.txt
 
 *** Variables ***
-${Contact_URL}     http://earth.local:8080/pennymail/contact
+${Contact_URL}     ${PENNYMAIL_URL}/contact
 
 
 *** Keywords ***
@@ -22,6 +22,6 @@ Fill in Recipients
     Input Text      addRecipients      ${recipients}
     
 Everything Is OK
-    Page Should Not Contain         แสรดด e Penny โง่
+    Page Should Not Contain         à¹�à¸ªà¸£à¸”à¸” e Penny à¹‚à¸‡à¹ˆ
     
       

@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.odde.pennymail.service.ContactService;
-import com.odde.pennymail.util.EmailTokenizer;
 import com.odde.pennymail.util.MailValidator;
 
 @Controller
@@ -23,7 +22,7 @@ public class ContactController {
 	@RequestMapping(value = "/contact", method = RequestMethod.GET)
 	public ModelAndView list() {
 		ModelAndView modelAndView = new ModelAndView("contact");
-		List contactList = contactService.list();
+		List<String> contactList = contactService.list();
 		modelAndView.getModel().put("contactList", contactList);
 		return modelAndView;
 	}
@@ -33,24 +32,29 @@ public class ContactController {
 	}
 
 	@RequestMapping(value = "/addrecipient", method = RequestMethod.POST)
-	public ModelAndView add(@RequestParam(value = "addRecipients") String email) {
-		EmailTokenizer token = new EmailTokenizer();
-		ModelAndView modelAndView = list();
-		if (email == null) {
-			return modelAndView;
-		}
-		String[] mails = token.splitEmail(email);
-		
-		for (String mail: mails) {
-			if(MailValidator.validate(mail)) {
+	public ModelAndView add(@RequestParam(value = "addRecipients") String emails) {
+		ArrayList<String> invalidList = addToContactList(emails);
+		return addInvalidListToModelAndView(invalidList);
+	}
+
+	private ArrayList<String> addToContactList(String emails) {
+		ArrayList<String> invalidList = new ArrayList<String>();
+		String delims = ",";
+		String[] mails = emails.split(delims);
+		for (String mail : mails) {
+			mail = mail.trim();
+			if (MailValidator.validate(mail)) {
 				this.contactService.add(mail);
 			} else {
-				ArrayList<String> invalidList = new ArrayList<String>();
 				invalidList.add(mail);
-				modelAndView.getModel().put("invalidList", invalidList);
 			}
 		}
-				
+		return invalidList;
+	}
+
+	private ModelAndView addInvalidListToModelAndView(ArrayList<String> invalidList) {
+		ModelAndView modelAndView = list();
+		modelAndView.getModel().put("invalidList", invalidList);
 		return modelAndView;
 	}
 

@@ -1,23 +1,23 @@
 package com.odde.pennymail.service;
+
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
-import java.util.List;
 
 import org.springframework.stereotype.Service;
 
 @Service
 public class ContactService {
-	ArrayList<String> emaillist = new ArrayList<String>();
-	public List list() {
-		Collections.sort(emaillist);
-		return emaillist;
+	ArrayList<String> emailList = new ArrayList<String>();
+
+	public ArrayList<String> list() {
+		Collections.sort(emailList);
+		return emailList;
 	}
 
 	public void add(String email) {
-		if(!email.trim().equals("")){
-		emaillist.add(email);
+		if (!emailList.contains(email)) {
+				emailList.add(email);
 		}
 	}
-	
+
 }

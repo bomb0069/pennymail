@@ -12,7 +12,7 @@
 		<td><textarea id="addRecipients" name="addRecipients" rows= "2" cols="50"></textarea></td>
 		<td><input type="submit" id="add" value="ADD"></td> 
 		<td>
-		<c:if test="${invalidList != null}">แสรดด e Penny โง่! invalid email: </c:if>
+		<c:if test="${invalidList.size() > 0}">แสรดด e Penny โง่! invalid email: </c:if>
 		<c:forEach items="${invalidList}" var="mail">
 				${mail}
 			<br />
@@ -23,9 +23,8 @@
 		<td>Recipients List</td>
 		<td colspan = "2">
 			<select multiple="multiple" size="10" style="width: 200px;">
-			<c:forEach items="${contactList}" var="contactName">
-				<option value="${contactName}">${contactName}</option>
-			</c:forEach>
+<c:forEach items="${contactList}" var="contactName">${contactName}
+</c:forEach>
 			</select>
 		</td> 
 		<td>
