@@ -58,6 +58,10 @@ Penny Should See Message
     
 Recipient Should Receive New Mail
     [Arguments]           ${topic}     ${mail_count}
+    
+    # wait 5 seconds for mail to be delivered
+    Sleep                                5 seconds
+    
     Open Mail Box
     Should Receive New Mail      ${topic}     ${mail_count}
     Close Mail Box

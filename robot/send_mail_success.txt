@@ -7,13 +7,29 @@ Test Teardown       Close Browser
 *** Test Cases ***
 Send Mail To Recipient
 	[Template]     Successfully Send Email To Recipient Workflow  
+	[Tags]         ignore
 	#-------------------------------|----------------------|-------------------------------------|-------------------------|
 	#       recipients              |          topic       |                  body               |   received mail count   |   
 	#-------------------------------|----------------------|-------------------------------------|-------------------------|
 	 a@gmail.com, b@gmail.com          New Gadget Coming       New Gadget arrive, Order Now !                  2
   	 a@gmail.com                       New Gadget Coming       ${EMPTY}                                        1
+  	 a@gmail.com                       New Gadget Coming       <html><body>Gadget</body></html>                1
+  	 
+Send Mail To Recipient Without Topic
+    I Compose Email Without Topic
+    I Confirm To Send It When The Popup Displays
+    Recipient Should Receive New Mail       ${EMPTY}     1
 
 *** Keywords ***
 Clean Up Mail Box
     Open Mail Box
     Delete Mail With Topic    New Gadget Coming
+    
+I Compose Email Without Topic
+	#-------------------------------|----------------------|------------------|----------------------------------|
+	#                               |      recipients      |       topic      |           body                   |      
+	#-------------------------------|----------------------|------------------|----------------------------------|
+    Send Email To Recipient               a@gmail.com             ${EMPTY}       New Gadget arrive, Order Now !
+    
+I Confirm To Send It When The Popup Displays
+    Click Button        okBtn
