@@ -12,18 +12,31 @@ Add Recipient
 	Go to                 ${Contact_URL}
 	Fill in Recipients    ${recipients}
 	Click Button          add
-	Everything is OK      ${recipients}
+    Page Should No Error Message
+	Recipients List Should Contain New Recipient           ${recipients}
+
+Add Multiple Recipients
+    [Arguments]    ${recipients}
+	Fill in Recipients    ${recipients}
+	Click Button          add
+    Page Should No Error Message
+    ${recipient_list} =    Split String    ${recipients}    ,
+    ${length} =    Get Length    ${recipient_list}
+    : FOR    ${i}    IN RANGE    0    ${length}
+	\    Recipients List Should Contain New Recipient      ${recipient_list[${i}]}
 
 Open Add Contact Browser
 	Open Browser                  ${Contact_URL} 
-	Set Selenium Speed            0.5
     Wait Until Page Contains      Recipients
     
 Fill in Recipients
 	[Arguments]     ${recipients}
     Input Text      addRecipients      ${recipients}
     
-Everything Is OK
-	[Arguments]     ${recipients}
+Recipients List Should Contain New Recipient
+	[Arguments]                     ${recipient}
+    Element Should Contain          currentRecipientsList              ${recipient}      
+
+Page Should No Error Message
     Page Should Not Contain         แสรดด e Penny โง่
-    Element Should Contain          currentRecipientsList              ${recipients}      
+    
