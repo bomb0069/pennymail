@@ -31,7 +31,7 @@
 </style>
 </head>
 <body>
-<form action="/pennymail/sendmail" method="post">
+<form action="/pennymail/sendmail" method="post" onsubmit="return onSubmitForm(document.getElementById('topic').value, showMessageBox)">
 	<label>RECIPIENTS</label><textarea id="recipients" name="recipients">${mail.recipients}</textarea>
 	<br>
 	<label>TOPIC</label>
