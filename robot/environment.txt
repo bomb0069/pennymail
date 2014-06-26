@@ -1,0 +1,5 @@
+*** Settings ***
+Library             Selenium2Library
+
+*** Variables ***
+${PENNYMAIL_URL}    http://localhost:8080/pennymail
