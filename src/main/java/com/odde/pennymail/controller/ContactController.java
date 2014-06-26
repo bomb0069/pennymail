@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.odde.pennymail.service.ContactService;
-import com.odde.pennymail.util.EmailTokenizer;
 import com.odde.pennymail.util.MailValidator;
 
 @Controller
@@ -39,10 +38,10 @@ public class ContactController {
 	}
 
 	private ArrayList<String> addToContactList(String emails) {
-		EmailTokenizer token = new EmailTokenizer();
 		ArrayList<String> invalidList = new ArrayList<String>();
-
-		for (String mail : token.splitEmail(emails)) {
+		String delims = ",";
+		String[] mails = emails.split(delims);
+		for (String mail : mails) {
 			mail = mail.trim();
 			if (MailValidator.validate(mail)) {
 				this.contactService.add(mail);
