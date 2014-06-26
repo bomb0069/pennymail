@@ -6,7 +6,7 @@ Test Teardown       Close Browser
 
 *** Test Cases ***
 Penny Add A New Recipient Then The Recipient Should Be Added Into List
-	[Template]     Add Recipient
+	[Template]     Add Recipient Workflow
 	#-----------------------------------------|
 	#                recipient                | 
 	#-----------------------------------------|
@@ -14,7 +14,7 @@ Penny Add A New Recipient Then The Recipient Should Be Added Into List
 	  abc123@hotmail.com
 	
 Penny Add Several New Recipients Then The Recipients Should Be Added Into List
-	[Template]     Add Multiple Recipients
+	[Template]     Add Multiple Recipients Workflow
 	#-----------------------------------------|
 	#                recipients               | 
 	#-----------------------------------------|

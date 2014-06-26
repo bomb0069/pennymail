@@ -7,7 +7,7 @@ ${Contact_URL}     ${PENNYMAIL_URL}/contact
 
 *** Keywords ***
 
-Add Recipient
+Add Recipient Workflow
 	[Arguments]     ${recipients}
 	Go to                 ${Contact_URL}
 	Fill in Recipients    ${recipients}
@@ -15,7 +15,7 @@ Add Recipient
     Page Should No Error Message
 	Recipients List Should Contain New Recipient           ${recipients}
 
-Add Multiple Recipients
+Add Multiple Recipients Workflow
     [Arguments]    ${recipients}
 	Fill in Recipients    ${recipients}
 	Click Button          add
