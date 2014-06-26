@@ -21,7 +21,7 @@ public class MailService {
 		email.setFrom("JUACOMPE.IG@gmail.com");
 		email.addTo(recipient);
 		email.setSubject(topic);
-		email.addBcc("penny@mailinator.com");
+		email.addBcc("penny.inspectorgadget@gmail.com");
 		if(body == null || body.equals("")) {
 			body = " ";
 		}

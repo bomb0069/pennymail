@@ -9,6 +9,7 @@ ${Contact_URL}     ${PENNYMAIL_URL}/contact
 
 Add Recipient
 	[Arguments]     ${recipients}
+	Go to                 ${Contact_URL}
 	Fill in Recipients    ${recipients}
 	Click Button          add
 	Everything is OK      ${recipients}
@@ -24,5 +25,5 @@ Fill in Recipients
     
 Everything Is OK
 	[Arguments]     ${recipients}
-    Page Should Not Contain         à¹�à¸ªà¸£à¸”à¸” e Penny à¹‚à¸‡à¹ˆ
+    Page Should Not Contain         แสรดด e Penny โง่
     Element Should Contain          currentRecipientsList              ${recipients}      
