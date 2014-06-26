@@ -76,7 +76,7 @@
         	<configuration>
         		<testCasesDirectory>${project.basedir}/robot</testCasesDirectory>
         		<nonCriticalTags>
-        			<nonCritialTag>not_ready</nonCritialTag>
+        			<nonCriticalTag>not_ready</nonCriticalTag>
         		</nonCriticalTags>
         	</configuration>
       </plugin>
