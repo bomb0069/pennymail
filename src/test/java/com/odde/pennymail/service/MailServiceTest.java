@@ -8,9 +8,8 @@ import javax.mail.MessagingException;
 
 import org.apache.commons.mail.Email;
 import org.apache.commons.mail.EmailException;
+import org.apache.commons.mail.SimpleEmail;
 import org.junit.Test;
-
-import com.odde.pennymail.service.MailService.MailService;
 
 public class MailServiceTest {
 	
@@ -53,6 +52,33 @@ public class MailServiceTest {
 	public void bccToPenny() throws EmailException, IOException, MessagingException {
 		mailService.send("bomb@gmail.com", "New Gadgets", "Sales 50% Off");
 		assertEquals("penny.inspectorgadget@gmail.com", mailService.getSavedEmail().getBccAddresses().get(0).getAddress());
+	}
+	
+	class MyEmail extends SimpleEmail {
+
+		@Override
+		public String send() throws EmailException {
+			this.buildMimeMessage();
+			return "";
+		}
+
+		public String getCharset() throws EmailException {
+			return this.charset;
+		}
+	};
+	@Test
+	public void sendMailWithThaiInformationShould() throws EmailException, IOException, MessagingException {
+		final MyEmail email = new MyEmail();
+		MailService mailService = new MailService() {
+			protected SimpleEmail createEmail() {
+				return email;
+			}
+		};
+		mailService.send("bomb@gmail.com", "หัวข้อ", "ข้อความ");
+		assertEquals("bomb@gmail.com", email.getToAddresses().get(0).toString());
+		assertEquals("หัวข้อ", email.getSubject());
+		assertEquals("ข้อความ", email.getMimeMessage().getContent());
+		assertEquals("UTF-8", email.getCharset());
 	}
 	
 	private void assertEmailConstructCorrectly(Email email) throws IOException,
