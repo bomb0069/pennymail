@@ -5,13 +5,19 @@ Test Setup          Open Add Contact Browser
 Test Teardown       Close Browser
 
 *** Test Cases ***
-Valid Email Rule
+Penny Add A New Recipient Then The Recipient Should Be Added Into List
 	[Template]     Add Recipient
-	# --- recipients ---- 									
-	valid@email.com
+	#-----------------------------------------|
+	#                recipient                | 
+	#-----------------------------------------|
+	  valid@email.com
+	  abc123@hotmail.com
 	
-Multiple Valid Email Rule
+Penny Add Several New Recipients Then The Recipients Should Be Added Into List
 	[Template]     Add Multiple Recipients
-	multiple@a.com,Roong@hotmail.com
-	nueng@hotmail.com,nueng@hotmail.com                             
+	#-----------------------------------------|
+	#                recipients               | 
+	#-----------------------------------------|
+      multiple@a.com,Roong@hotmail.com
+	  nueng@hotmail.com,nueng@hotmail.com                             
 
