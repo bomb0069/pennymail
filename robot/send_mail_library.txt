@@ -4,7 +4,9 @@ Library             check_mail.py
 Resource            environment.txt
 
 *** Variables ***
-${SENDMAIL_URL}     ${PENNYMAIL_URL}/sendmail
+${SENDMAIL_URL}     		${PENNYMAIL_URL}/sendmail
+${ID_CONFIRM_DIALOG_POPUP}	noTopicConfirmOverlay
+${ID_CANCLE_BTN}			cancelBtn
 
 *** Keywords ***
 Successfully Send Email To Recipient Workflow
@@ -17,6 +19,13 @@ Can't Send Email To Recipient Workflow
 	[Arguments]                 ${recipients}     ${topic}     ${body}      ${message}
     Send Email To Recipient     ${recipients}     ${topic}     ${body}
     Penny Should See Message    ${message}
+    
+Popup Error Message Workflow
+    [Arguments]                         ${recipients}     ${topic}     ${body}      ${message}
+    Send Email To Recipient             ${recipients}     ${topic}     ${body}
+    Wait Until Page Contains		    ${message}
+    Click Button                        ${ID_CANCLE_BTN}
+    Element Should Not Be Visible       ${ID_CONFIRM_DIALOG_POPUP}
 
 Send Email To Recipient
 	[Arguments]                 ${recipients}     ${topic}     ${body}
@@ -52,6 +61,10 @@ Recipient Should Receive New Mail
     Open Mail Box
     Should Receive New Mail      ${topic}     ${mail_count}
     Close Mail Box
+
+Penny Should Not See Message
+	[Arguments]                     ${message}
+    Page Should Not Contain         ${message}
     
 Everything Is OK
-    Page Should Not Contain         à¹�à¸ªà¸£à¸”à¸” e Penny à¹‚à¸‡à¹ˆ
+    Penny Should Not See Message    à¹�à¸ªà¸£à¸”à¸” e Penny à¹‚à¸‡à¹ˆ
