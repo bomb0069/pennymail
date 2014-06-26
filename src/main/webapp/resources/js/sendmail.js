@@ -1,9 +1,9 @@
 function showMessageBox()
 {
-	return "";
+	$('#noTopicConfirmOverlay').show();
 }
 
-function onSubmitForm(topic,callbackfunc)
+function onSubmitForm(topic,callbackfunction)
 {
 	if(topic=="")
 	{

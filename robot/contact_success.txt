@@ -1,4 +1,5 @@
 *** Settings ***
+Library             String
 Resource            contact_library.txt
 Test Setup          Open Add Contact Browser
 Test Teardown       Close Browser
@@ -7,8 +8,20 @@ Test Teardown       Close Browser
 Valid Email Rule
 	[Template]     Add Recipient
 	# --- recipients ---- 									
-	valid@email.com    
+	valid@email.com
+	
+Multiple Valid Email Rule
+	[Template]     Add Multiple Recipients
+	[Tags]         not_ready
 	multiple@a.com,Roong@hotmail.com
-	Valid@email.com
 	nueng@hotmail.com,nueng@hotmail.com                             
 
+*** Keywords ***
+ Add Multiple Recipients
+    [Arguments]    ${recipients}
+	Fill in Recipients    ${recipients}
+	Click Button          add
+    ${recipient_list} =    Split String    ${recipients}    ,
+    ${length} =    Get Length    ${recipient_list}
+    : FOR    ${i}    IN RANGE    0    ${length}
+	\    Everything is OK      ${recipient_list[${i}]}

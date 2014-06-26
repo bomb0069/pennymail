@@ -22,10 +22,10 @@
 		<tr>
 		<td>Recipients List</td>
 		<td colspan = "2">
-			<select multiple="multiple" size="10" style="width: 200px;">
+			<textarea readonly id="currentRecipientsList"  style="overflow-y: auto; overflow-x: hidden"  rows="4">
 <c:forEach items="${contactList}" var="contactName">${contactName}
 </c:forEach>
-			</select>
+			</textarea>
 		</td> 
 		<td>
 		</td>

@@ -1,14 +1,17 @@
 *** Settings ***
-Resource           environment.txt
+Library             Selenium2Library
+Library             check_mail.py
+Resource            environment.txt
 
 *** Variables ***
 ${SENDMAIL_URL}     ${PENNYMAIL_URL}/sendmail
 
 *** Keywords ***
 Successfully Send Email To Recipient Workflow
-	[Arguments]                 ${recipients}     ${topic}     ${body}
-    Send Email To Recipient     ${recipients}     ${topic}     ${body}
+	[Arguments]                          ${recipients}     ${topic}     ${body}    ${received_mail_count}
+    Send Email To Recipient              ${recipients}     ${topic}     ${body}
     Everything Is OK
+    Recipient Should Receive New Mail    ${topic}     ${received_mail_count}
 
 Can't Send Email To Recipient Workflow
 	[Arguments]                 ${recipients}     ${topic}     ${body}      ${message}
@@ -25,7 +28,7 @@ Send Email To Recipient
 
 Open Sendmail Browser
 	Open Browser                  ${SENDMAIL_URL}
-	Set Selenium Speed            0.5
+#	Set Selenium Speed            0.5
     Wait Until Page Contains      RECIPIENTS
 
 Fill in Recipients
@@ -43,6 +46,12 @@ Fill in Message
 Penny Should See Message
     [Arguments]     ${message}
     Page Should Contain             ${message}
+    
+Recipient Should Receive New Mail
+    [Arguments]           ${topic}     ${mail_count}
+    Open Mail Box
+    Should Receive New Mail      ${topic}     ${mail_count}
+    Close Mail Box
     
 Everything Is OK
     Page Should Not Contain         à¹�à¸ªà¸£à¸”à¸” e Penny à¹‚à¸‡à¹ˆ
