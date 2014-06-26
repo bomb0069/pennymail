@@ -11,10 +11,11 @@ Add Recipient
 	[Arguments]     ${recipients}
 	Fill in Recipients    ${recipients}
 	Click Button          add
-	Everything is OK
+	Everything is OK      ${recipients}
 
 Open Add Contact Browser
 	Open Browser                  ${Contact_URL} 
+	Set Selenium Speed            0.5
     Wait Until Page Contains      Recipients
     
 Fill in Recipients
@@ -22,6 +23,6 @@ Fill in Recipients
     Input Text      addRecipients      ${recipients}
     
 Everything Is OK
+	[Arguments]     ${recipients}
     Page Should Not Contain         à¹�à¸ªà¸£à¸”à¸” e Penny à¹‚à¸‡à¹ˆ
-    
-      
+    Element Should Contain          currentRecipientsList              ${recipients}      
