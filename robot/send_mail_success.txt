@@ -1,6 +1,6 @@
 *** Settings ***
 Resource            send_mail_library.txt
-Suite Teardown      Clean Up Mail Box
+Suite Setup         Clean Up Mail Box
 Test Setup          Open Sendmail Browser
 Test Teardown       Close Browser
 
