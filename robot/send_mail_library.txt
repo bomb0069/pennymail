@@ -7,6 +7,7 @@ Resource            environment.txt
 ${SENDMAIL_URL}     		${PENNYMAIL_URL}/sendmail
 ${ID_CONFIRM_DIALOG_POPUP}	noTopicConfirmOverlay
 ${ID_CANCLE_BTN}			cancelBtn
+${ID_CONFIRM_BTN}           okBtn
 
 *** Keywords ***
 Successfully Send Email To Recipient Workflow
@@ -20,13 +21,13 @@ Can't Send Email To Recipient Workflow
     Send Email To Recipient     ${recipients}     ${topic}     ${body}
     Penny Should See Message    ${message}
     
-Popup Error Message Workflow
-    [Arguments]                         ${recipients}     ${topic}     ${body}      ${message}
-    Send Email To Recipient             ${recipients}     ${topic}     ${body}
+Popup Message Confirm Workflow
+    [Arguments]                         ${recipients}     ${body}      ${id_button}  	${message}
+    Send Email To Recipient             ${recipients}     ${EMPTY}     ${body}
     Wait Until Page Contains		    ${message}
-    Click Button                        ${ID_CANCLE_BTN}
+    Click Button                        ${id_button}
     Element Should Not Be Visible       ${ID_CONFIRM_DIALOG_POPUP}
-
+    
 Send Email To Recipient
 	[Arguments]                 ${recipients}     ${topic}     ${body}
 	Go To                       ${SENDMAIL_URL}
