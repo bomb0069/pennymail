@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.odde.pennymail.model.MailRequest;
-import com.odde.pennymail.service.MailService.MailService;
+import com.odde.pennymail.service.MailService;
 import com.odde.pennymail.util.MailValidator;
 
 @Controller

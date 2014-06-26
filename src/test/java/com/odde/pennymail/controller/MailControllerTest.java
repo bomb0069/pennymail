@@ -11,7 +11,7 @@ import org.junit.Test;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.odde.pennymail.model.MailRequest;
-import com.odde.pennymail.service.MailService.MailService;
+import com.odde.pennymail.service.MailService;
 
 public class MailControllerTest {
 	MailController mailController;

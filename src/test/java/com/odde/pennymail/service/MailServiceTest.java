@@ -8,9 +8,8 @@ import javax.mail.MessagingException;
 
 import org.apache.commons.mail.Email;
 import org.apache.commons.mail.EmailException;
+import org.apache.commons.mail.SimpleEmail;
 import org.junit.Test;
-
-import com.odde.pennymail.service.MailService.MailService;
 
 public class MailServiceTest {
 	
@@ -55,11 +54,36 @@ public class MailServiceTest {
 		assertEquals("penny.inspectorgadget@gmail.com", mailService.getSavedEmail().getBccAddresses().get(0).getAddress());
 	}
 	
+	class MyEmail extends SimpleEmail {
+
+		@Override
+		public String send() throws EmailException {
+			this.buildMimeMessage();
+			return "";
+		}
+
+		public String getCharset() throws EmailException {
+			return this.charset;
+		}
+	};
+	@Test
+	public void sendMailWithThaiInformationShould() throws EmailException, IOException, MessagingException {
+		final MyEmail email = new MyEmail();
+		MailService mailService = new MailService() {
+			protected SimpleEmail createEmail() {
+				return email;
+			}
+		};
+		mailService.send("bomb@gmail.com", "หัวข้อ", "ข้อความ");
+		assertEquals("bomb@gmail.com", email.getToAddresses().get(0).getAddress());
+		assertEquals("หัวข้อ", email.getSubject());
+		assertEquals("ข้อความ", email.getMimeMessage().getContent());
+	}
+	
 	private void assertEmailConstructCorrectly(Email email) throws IOException,
 			MessagingException {
-		assertEquals("bomb@gmail.com", email.getToAddresses().get(0).toString());
+		assertEquals("bomb@gmail.com", email.getToAddresses().get(0).getAddress());
 		assertEquals("New Gadgets", email.getSubject());
 		assertEquals("Sales 50% Off", email.getMimeMessage().getContent());
 	}
-	
 }
