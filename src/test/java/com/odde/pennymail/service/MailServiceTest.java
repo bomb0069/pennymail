@@ -49,6 +49,12 @@ public class MailServiceTest {
 		assertEquals(" ", mailService.getSavedEmail().getMimeMessage().getContent());
 	}
 	
+	@Test
+	public void bccToPenny() throws EmailException, IOException, MessagingException {
+		mailService.send("bomb@gmail.com", "New Gadgets", "Sales 50% Off");
+		assertEquals("penny@mailinator.com", mailService.getSavedEmail().getBccAddresses().get(0).getAddress());
+	}
+	
 	private void assertEmailConstructCorrectly(Email email) throws IOException,
 			MessagingException {
 		assertEquals("bomb@gmail.com", email.getToAddresses().get(0).toString());

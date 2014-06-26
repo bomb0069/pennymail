@@ -1,5 +1,7 @@
 package com.odde.pennymail.controller;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.mail.EmailException;
@@ -16,7 +18,6 @@ import com.odde.pennymail.util.MailValidator;
 @Controller
 public class MailController {
 	MailService mailService = new MailService();
-
 	@RequestMapping(value = "/sendmail", method = RequestMethod.GET)
 	public ModelAndView composeMail() {
 		MailRequest mailreq = new MailRequest();
@@ -30,18 +31,20 @@ public class MailController {
 	public ModelAndView sendMail(@ModelAttribute("mail") MailRequest mail)
 			throws EmailException {
 		ModelAndView mav = new ModelAndView();
+		List<String> errorList = new ArrayList<String>();
 		mav.setViewName("sendmail");
 		Map<String, Object> model = mav.getModel();
 		
 		for (String recipient : mail.getRecipientsList()) {
 			if (!isEmailValid(recipient)) {
-				model.put("errorMessage", "แสรดด e Penny โง่ " + recipient + " ใช้ไม่ได้");
+				errorList.add("แสรดด e Penny โง่ " + recipient + " ใช้ไม่ได้");
 				model.put("mail", mail);
 			} else {
 				mailService.send(recipient, mail.getTopic(), mail.getMessage());
 				model.put("mail", new MailRequest());
 			}
 		}
+		model.put("errorList", errorList);
 		return mav;
 	}
 

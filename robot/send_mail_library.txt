@@ -1,9 +1,10 @@
 *** Settings ***
 Library             Selenium2Library
 Library             check_mail.py
+Resource            environment.txt
 
 *** Variables ***
-${SENDMAIL_URL}     http://earth.local:8080/pennymail/sendmail
+${SENDMAIL_URL}     ${PENNYMAIL_URL}/sendmail
 
 *** Keywords ***
 Successfully Send Email To Recipient Workflow
@@ -53,4 +54,4 @@ Recipient Should Receive New Mail
     Close Mail Box
     
 Everything Is OK
-    Page Should Not Contain         แสรดด e Penny โง่
+    Page Should Not Contain         à¹�à¸ªà¸£à¸”à¸” e Penny à¹‚à¸‡à¹ˆ

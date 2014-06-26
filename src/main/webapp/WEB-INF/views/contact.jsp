@@ -1,4 +1,5 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ page pageEncoding="utf-8" %>
 <html>
 <head>
 	<title>Admin</title>
@@ -8,9 +9,10 @@
 	<table>
 		<tr>
 		<td>Recipients</td>
-		<td><textarea id = "addRecipients" rows= "1"></textarea></td>
-		<td><input type = "submit" id="add" value = "ADD"></td> 
+		<td><textarea id="addRecipients" name="addRecipients" rows= "2" cols="50"></textarea></td>
+		<td><input type="submit" id="add" value="ADD"></td> 
 		<td>
+		<c:if test="${invalidList.size() > 0}">แสรดด e Penny โง่! invalid email: </c:if>
 		<c:forEach items="${invalidList}" var="mail">
 				${mail}
 			<br />
@@ -20,12 +22,10 @@
 		<tr>
 		<td>Recipients List</td>
 		<td colspan = "2">
-			<textarea readonly id = "currentRecipientsList"  style= "overflow-y: auto; overflow-x: hidden"  rows= "4">
-			<c:forEach items="${contactList}" var="contactName">
-				${contactName}
-			<br />
-			</c:forEach>
-			</textarea>
+			<select multiple="multiple" size="10" style="width: 200px;">
+<c:forEach items="${contactList}" var="contactName">${contactName}
+</c:forEach>
+			</select>
 		</td> 
 		<td>
 		</td>

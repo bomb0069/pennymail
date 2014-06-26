@@ -12,26 +12,13 @@ import org.springframework.web.servlet.ModelAndView;
 import com.odde.pennymail.service.ContactService;
 
 public class ContactControllerTest {
-
-	class FakeContactService extends ContactService {
-		public ArrayList contactList = new ArrayList();
-
-		public List list() {
-			return contactList;
-		}
-
-		public void add(String email) {
-			contactList.add(email);
-		}
-	}
-
 	ContactController controller;
-	FakeContactService service;
+	ContactService service;
 
 	@Before
 	public void setUp() {
 		controller = new ContactController();
-		service = new FakeContactService();
+		service = new ContactService();
 		controller.setContactService(service);
 	}
 
@@ -44,12 +31,13 @@ public class ContactControllerTest {
 
 	@Test
 	public void addEmail() {
-		ArrayList oldContactList = (ArrayList) service.contactList.clone();
+		ArrayList<String> oldContactList = (ArrayList<String>) service.list()
+				.clone();
 		ModelAndView modelAndView = controller.add("new@email.com");
 
 		assertEquals("contact", modelAndView.getViewName());
-		ArrayList newContactList = (ArrayList) modelAndView.getModel().get(
-				"contactList");
+		ArrayList<String> newContactList = (ArrayList<String>) modelAndView
+				.getModel().get("contactList");
 		assertEquals(oldContactList.size() + 1, newContactList.size());
 
 	}
@@ -61,6 +49,18 @@ public class ContactControllerTest {
 		assertEquals("contact", modelAndView.getViewName());
 		assertEquals("newemail.com",
 				((List) modelAndView.getModel().get("invalidList")).get(0));
+	}
+
+	@Test
+	public void addMultipleEmail() {
+		ArrayList<String> oldContactList = (ArrayList<String>) service.list()
+				.clone();
+		ModelAndView modelAndView = controller
+				.add("new@email.com,nn@email.com");
+
+		ArrayList<String> newContactList = (ArrayList<String>) modelAndView
+				.getModel().get("contactList");
+		assertEquals(oldContactList.size() + 2, newContactList.size());
 	}
 
 }
