@@ -8,12 +8,20 @@ Test Teardown       Close Browser
 
 Penny Add Several New Recipients Then The Recipients Should Be Added Into List
 	[Template]     Add Recipients Workflow
+	
 	#-----------------------------------------|
 	#                recipients               | 
 	#-----------------------------------------|
       valid@email.com
 	  abc123@hotmail.com
       multiple@a.com,Roong@hotmail.com
-	  nueng@hotmail.com,nueng@hotmail.com  
+      nueng@hotmail.com,nueng@hotmail.com  
+		
 	                             
 
+Penny Should See Error Message After Trying To Add Invalid Emails
+	[Template]     Add Invalid Recipients Workflow
+	#-----------------------------------------|
+	#                recipients               | 
+	#-----------------------------------------|
+      invalid.com
