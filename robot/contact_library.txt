@@ -7,11 +7,23 @@ ${Contact_URL}     ${PENNYMAIL_URL}/contact
 
 *** Keywords ***
 
-Add Recipient
-	[Arguments]     ${recipients}
+Add Recipients Workflow
+	[Arguments]        ${recipients}
+	Add Recipients     ${recipients}
+	All Recipients Should Be Added Into List Without Errors
+
+Add Recipients
+    [Arguments]           ${recipients}
+	Go to                 ${Contact_URL}
 	Fill in Recipients    ${recipients}
 	Click Button          add
-	Everything is OK
+	
+All Recipients Should Be Added Into List Without Errors
+    Page Should No Error Message
+    ${recipient_list} =    Split String    ${recipients}    ,
+    ${length} =    Get Length    ${recipient_list}
+    : FOR    ${i}    IN RANGE    0    ${length}
+	\    Recipients List Should Contain New Recipient      ${recipient_list[${i}]}
 
 Open Add Contact Browser
 	Open Browser                  ${Contact_URL} 
@@ -21,7 +33,10 @@ Fill in Recipients
 	[Arguments]     ${recipients}
     Input Text      addRecipients      ${recipients}
     
-Everything Is OK
-    Page Should Not Contain         à¹�à¸ªà¸£à¸”à¸” e Penny à¹‚à¸‡à¹ˆ
+Recipients List Should Contain New Recipient
+	[Arguments]                     ${recipient}
+    Element Should Contain          currentRecipientsList              ${recipient}      
+
+Page Should No Error Message
+    Page Should Not Contain         แสรดด e Penny โง่
     
-      

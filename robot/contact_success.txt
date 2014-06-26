@@ -1,14 +1,19 @@
 *** Settings ***
+Library             String
 Resource            contact_library.txt
 Test Setup          Open Add Contact Browser
 Test Teardown       Close Browser
 
 *** Test Cases ***
-Valid Email Rule
-	[Template]     Add Recipient
-	# --- recipients ---- 									
-	valid@email.com    
-	multiple@a.com,Roong@hotmail.com
-	Valid@email.com
-	nueng@hotmail.com,nueng@hotmail.com                             
+
+Penny Add Several New Recipients Then The Recipients Should Be Added Into List
+	[Template]     Add Recipients Workflow
+	#-----------------------------------------|
+	#                recipients               | 
+	#-----------------------------------------|
+      valid@email.com
+	  abc123@hotmail.com
+      multiple@a.com,Roong@hotmail.com
+	  nueng@hotmail.com,nueng@hotmail.com  
+	                             
 

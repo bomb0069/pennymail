@@ -7,6 +7,23 @@ describe("Send Mail", function() {
     	};
     	expect(onSubmitForm(topic,callbackfunction)).toEqual(false);
     	expect(isCalled).toEqual(true);
-    	
+    });
+    it("Close popup when choose 'อุ้ยผิด'", function(){
+    	isCalled = false;
+    	callbackfunction = function(){
+    		isCalled = true;
+    	};
+    	onCancleButtonClick(callbackfunction);
+    	expect(isCalled).toEqual(true);
+    });
+    it("Send email when choose 'OK เออกูโง่'",function(){
+    	isCalled = false;
+    	elem = {
+    		submit: function() {
+    			isCalled = true;
+    		}	
+    	};
+    	onOkButtonClick(elem);
+    	expect(isCalled).toEqual(true);
     });
 });
