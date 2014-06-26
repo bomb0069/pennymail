@@ -23,20 +23,8 @@ public class ContactServiceTest {
 	@Test
 	public void getZeroRecipientList() {
 		assertEquals(0, contact.list().size());
-	}
-	
-	@Test
-	public void shouldNotAbleToAddEmptyContact() {
-		contact.add("");
-		assertEquals(0, contact.list().size());
-	}
-	
-	@Test
-	public void shouldNotAbleToAddEmptyContact1() {
-		contact.add(null);
-		assertEquals(0, contact.list().size());
-	}
-	
+	}	
+
 	@Test
 	public void shouldBeAbleToAddMultipleContacts()
 	{
