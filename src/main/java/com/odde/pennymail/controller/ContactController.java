@@ -39,10 +39,10 @@ public class ContactController {
 	}
 
 	private ArrayList<String> addToContactList(String emails) {
-		EmailTokenizer token = new EmailTokenizer();
 		ArrayList<String> invalidList = new ArrayList<String>();
-
-		for (String mail : token.splitEmail(emails)) {
+		String delims = ",";
+		String[] mails = emails.split(delims);
+		for (String mail : mails) {
 			mail = mail.trim();
 			if (MailValidator.validate(mail)) {
 				this.contactService.add(mail);
