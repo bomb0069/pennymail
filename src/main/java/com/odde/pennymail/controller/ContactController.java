@@ -58,4 +58,14 @@ public class ContactController {
 		return modelAndView;
 	}
 
+	@RequestMapping(value = "/addattribute", method = RequestMethod.POST)
+	public ModelAndView addAttributeToContact(
+			@RequestParam(value = "email") String email, 
+			@RequestParam(value = "attribute") String attribute) {
+		
+		ModelAndView modelAndView = new ModelAndView("contact");
+		
+		return modelAndView;
+	}
+
 }
