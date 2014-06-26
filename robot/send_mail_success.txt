@@ -4,11 +4,12 @@ Test Setup          Open Sendmail Browser
 Test Teardown       Close Browser
 
 *** Test Cases ***
-Successfully Send Email Rule
+Send Mail To Recipient
 	[Template]     Successfully Send Email To Recipient Workflow  
-	#------------------------------------------------------|------------------------|---------------------------------------|
-	#                     recipients                       |          topic         |                  body                 |
-	#------------------------------------------------------|------------------------|---------------------------------------|
-	 bomb412355451244@gmail.com,max412355451244@gmail.com      New Gadget Coming         New Gadget arrive, Order Now !
-  	 bomb412355451244@gmail.com                                New Gadget Coming         ${EMPTY}
+	[Tags]		   not_ready
+	#-------------------------------|----------------------|-------------------------------------|-------------------------|
+	#       recipients              |          topic       |                  body               |   received mail count   |   
+	#-------------------------------|----------------------|-------------------------------------|-------------------------|
+	 a@gmail.com, b@gmail.com          New Gadget Coming       New Gadget arrive, Order Now !                  2
+  	 a@gmail.com                       New Gadget Coming       ${EMPTY}                                        1
 
