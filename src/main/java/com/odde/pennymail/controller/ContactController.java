@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.odde.pennymail.service.ContactService;
-import com.odde.pennymail.util.EmailTokenizer;
 import com.odde.pennymail.util.MailValidator;
 
 @Controller
