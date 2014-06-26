@@ -23,7 +23,7 @@ public class ContactController {
 	@RequestMapping(value = "/contact", method = RequestMethod.GET)
 	public ModelAndView list() {
 		ModelAndView modelAndView = new ModelAndView("contact");
-		List contactList = contactService.list();
+		List<String> contactList = contactService.list();
 		modelAndView.getModel().put("contactList", contactList);
 		return modelAndView;
 	}

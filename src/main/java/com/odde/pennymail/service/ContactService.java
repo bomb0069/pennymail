@@ -8,16 +8,16 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class ContactService {
-	ArrayList<String> emaillist = new ArrayList<String>();
+	ArrayList<String> emailList = new ArrayList<String>();
 
-	public List list() {
-		Collections.sort(emaillist);
-		return emaillist;
+	public List<String> list() {
+		Collections.sort(emailList);
+		return emailList;
 	}
 
 	public void add(String email) {
-		if (null != email &&!email.trim().equals("") && !emaillist.contains(email.trim())) {
-				emaillist.add(email);
+		if (null != email &&!email.trim().equals("") && !emailList.contains(email.trim())) {
+				emailList.add(email);
 		}
 	}
 
