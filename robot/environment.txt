@@ -2,4 +2,4 @@
 Library             Selenium2Library
 
 *** Variables ***
-${PENNYMAIL_URL}    http://localhost:8080/pennymail
+${PENNYMAIL_URL}    http://localhost:18080/pennymail

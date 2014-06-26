@@ -20,8 +20,8 @@ Add Recipients
 	
 All Recipients Should Be Added Into List Without Errors
     Page Should No Error Message
-    ${recipient_list} =    Split String    ${recipients}    ,
-    ${length} =    Get Length    ${recipient_list}
+    ${recipient_list} =     Split String    ${recipients}    ,
+    ${length} =             Get Length      ${recipient_list}
     : FOR    ${i}    IN RANGE    0    ${length}
 	\    Recipients List Should Contain New Recipient      ${recipient_list[${i}]}
 
