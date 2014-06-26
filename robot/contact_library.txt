@@ -7,18 +7,18 @@ ${Contact_URL}     ${PENNYMAIL_URL}/contact
 
 *** Keywords ***
 
-Add Recipient Workflow
-	[Arguments]     ${recipients}
+Add Recipients Workflow
+	[Arguments]        ${recipients}
+	Add Recipients     ${recipients}
+	All Recipients Should Be Added Into List Without Errors
+
+Add Recipients
+    [Arguments]           ${recipients}
 	Go to                 ${Contact_URL}
 	Fill in Recipients    ${recipients}
 	Click Button          add
-    Page Should No Error Message
-	Recipients List Should Contain New Recipient           ${recipients}
-
-Add Multiple Recipients Workflow
-    [Arguments]    ${recipients}
-	Fill in Recipients    ${recipients}
-	Click Button          add
+	
+All Recipients Should Be Added Into List Without Errors
     Page Should No Error Message
     ${recipient_list} =    Split String    ${recipients}    ,
     ${length} =    Get Length    ${recipient_list}

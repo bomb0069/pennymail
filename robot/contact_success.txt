@@ -5,19 +5,15 @@ Test Setup          Open Add Contact Browser
 Test Teardown       Close Browser
 
 *** Test Cases ***
-Penny Add A New Recipient Then The Recipient Should Be Added Into List
-	[Template]     Add Recipient Workflow
-	#-----------------------------------------|
-	#                recipient                | 
-	#-----------------------------------------|
-	  valid@email.com
-	  abc123@hotmail.com
-	
+
 Penny Add Several New Recipients Then The Recipients Should Be Added Into List
-	[Template]     Add Multiple Recipients Workflow
+	[Template]     Add Recipients Workflow
 	#-----------------------------------------|
 	#                recipients               | 
 	#-----------------------------------------|
+      valid@email.com
+	  abc123@hotmail.com
       multiple@a.com,Roong@hotmail.com
-	  nueng@hotmail.com,nueng@hotmail.com                             
+	  nueng@hotmail.com,nueng@hotmail.com  
+	                             
 
