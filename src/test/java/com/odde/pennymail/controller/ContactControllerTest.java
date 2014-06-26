@@ -62,5 +62,13 @@ public class ContactControllerTest {
 				.getModel().get("contactList");
 		assertEquals(oldContactList.size() + 2, newContactList.size());
 	}
+	
+	@Test
+	public void addAttributeToContact() {
+		ModelAndView modelAndView = controller.addAttributeToContact("a@mail.com","attribute");
+		
+		assertEquals("contact", modelAndView.getViewName());
+		
+	}
 
 }
