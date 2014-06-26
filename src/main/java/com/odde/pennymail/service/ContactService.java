@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 public class ContactService {
 	ArrayList<String> emailList = new ArrayList<String>();
 
-	public List<String> list() {
+	public ArrayList<String> list() {
 		Collections.sort(emailList);
 		return emailList;
 	}
