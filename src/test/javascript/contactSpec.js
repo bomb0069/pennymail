@@ -14,6 +14,6 @@ describe("Contact", function() {
     	document.getElementsByTagName('html')[0].appendChild(node);
     	jsonInput = {"email": "penny@gmail.com", "attributes": [{"key": "Firstname", "value": "Penny"}]};
     	showAttribute(document, jsonInput);
-    	expect(document.getElementById('email').innerHTML).toEqual('<input type="hidden" value="penny@gmail.com">penny@gmail.com');
+    	expect(document.getElementById('email').innerHTML).toContain('penny@gmail.com');
     });
 });
