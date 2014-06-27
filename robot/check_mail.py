@@ -1,5 +1,6 @@
 import imaplib
- 
+import base64
+
 class check_mail:
  
     ROBOT_LIBRARY_SCOPE = 'GLOBAL'
@@ -30,13 +31,23 @@ class check_mail:
         if int(actual) != int(expect):
             raise AssertionError('Expect mail count %s but was %s' % (expect, actual))     
  
-    def delete_mail_with_topic(self, topic):
-        response, item = self.mailbox.search(None, '(UNSEEN FROM "juacompe.ig@gmail.com" SUBJECT "%s")' % topic)
+    def read_all_mail(self):
+        response, item = self.mailbox.search(None, '(UNSEEN FROM "juacompe.ig@gmail.com")')
         
         for mail_id in item[0].split():
-            self.mailbox.store(mail_id, '+FLAGS', '\\Deleted')
-            
-        self.mailbox.expunge()
+            self.mailbox.store(mail_id, '+FLAGS', '\\Seen')
+        
+    def get_mail_body_by_mail_topic(self, topic):
+    	response, item = self.mailbox.search(None, '(UNSEEN FROM "juacompe.ig@gmail.com" SUBJECT "%s")' % topic)
+    	mail_ids = item[0].split()
+    	
+    	if len(mail_ids) == 0:
+    	    raise AssertionError("No mail with topic %s found" % topic)
+    	
+        body = self.mailbox.fetch(mail_ids[0], '(BODY[TEXT])')[1][0][1]
+        body = base64.b64decode(body).decode('UTF-8')
+        
+        return body
  
     def close_mailbox(self):
         self.mailbox.close() 

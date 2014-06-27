@@ -18,17 +18,22 @@ Send Mail To Recipient Without Topic
     I Compose Email Without Topic
     I Confirm To Send It When The Popup Displays
     Recipient Should Receive New Mail       ${EMPTY}     1
+    
+Send Mail To Recipient With Thai Content
+    Send Email To Recipient               a@gmail.com             Mail Topic     สวัสดี
+    Recipient Should Receive New Mail With Body                   Mail Topic     สวัสดี
 
 *** Keywords ***
 Clean Up Mail Box
     Open Mail Box
-    Delete Mail With Topic    New Gadget Coming
+    Read All Mail
     
 I Compose Email Without Topic
-	#-------------------------------|----------------------|------------------|----------------------------------|
-	#                               |      recipients      |       topic      |           body                   |      
-	#-------------------------------|----------------------|------------------|----------------------------------|
-    Send Email To Recipient               a@gmail.com             ${EMPTY}       New Gadget arrive, Order Now !
+    Send Email To Recipient               a@gmail.com             ${EMPTY}              New Gadget arrive, Order Now !
+    
+I Compose Email With Body
+    [Arguments]           ${body}
+    Send Email To Recipient               a@gmail.com             Mail Topic     ${body}
     
 I Confirm To Send It When The Popup Displays
     Click Button        okBtn
