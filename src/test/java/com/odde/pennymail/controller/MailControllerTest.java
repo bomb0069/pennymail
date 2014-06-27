@@ -114,6 +114,21 @@ public class MailControllerTest {
 		assertEquals(expectedErrorList, mav.getModel().get("errorList"));
 	}
 	
+	@Test
+	public void SendMailToMultipleRecipientsWithNewLineAsSeparator() throws EmailException
+	{
+		String multipleRecipients = "valid@gmail.com\nneung@gmail.com";
+		String topic              = "topic1";
+		String message            = "message from penny";
+		MailRequest mailReq = buildMailRequest(multipleRecipients,topic,message);
+		ModelAndView mav = mailController.sendMail(mailReq);
+		assertEquals(2,this.mailService.getSentCount());
+		assertEquals("valid@gmail.com",this.mailService.getRecipientAtIndex(0));
+		assertEquals("neung@gmail.com",this.mailService.getRecipientAtIndex(1));
+		assertEquals("sendmail", mav.getViewName());
+		List<String> errorList = (List<String>)mav.getModel().get("errorList");
+		assertEquals(0, errorList.size());
+	}	
 	private MailRequest buildMailRequest(String recipients,String topic,String message)
 	{
 		MailRequest mailReq = new MailRequest();
