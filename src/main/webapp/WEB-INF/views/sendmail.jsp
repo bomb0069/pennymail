@@ -15,8 +15,6 @@ body {
 }
 
 #noTopicConfirmOverlay {
-	position: relative;
-	top:-500px;
 	border: 1px solid #000;
 	padding: 10px;
 	width: 300px;
@@ -25,7 +23,11 @@ body {
 	display: none;
 	margin: 0 auto;
 }
-
+#noTopicConfirmOverlayContainer {
+	position: absolute;
+	top: 120px;
+	width: 100%;
+}
 #okBtn,#cancelBtn {
 	bottom: 10px;
 }
@@ -133,13 +135,14 @@ span.errorMessage{
 			</div>
 		</form>
 	</div>
-	<div id="noTopicConfirmOverlay">
-		<h1>e Penny โง่ เดี๋ยวโดนแบนหรอก!</h1>
-		<button id="okBtn" class="btn"
-			onClick="onOkButtonClick(document.getElementById('sendMailForm'))">OK
-			กูโง่</button>
-		<button id="cancelBtn" class="btn" onClick="onCancleButtonClick(hideMessageBox);">อุ้ยผิด</button>
+	<div id="noTopicConfirmOverlayContainer">
+		<div id="noTopicConfirmOverlay">
+			<h1>e Penny โง่ เดี๋ยวโดนแบนหรอก!</h1>
+			<button id="okBtn" class="btn"
+				onClick="onOkButtonClick(document.getElementById('sendMailForm'))">OK
+				กูโง่</button>
+			<button id="cancelBtn" class="btn" onClick="onCancleButtonClick(hideMessageBox);">อุ้ยผิด</button>
+		</div>
 	</div>
-
 </body>
 </html>
