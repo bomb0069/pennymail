@@ -2,26 +2,22 @@ package com.odde.pennymail.service;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.TreeMap;
 
 import org.springframework.stereotype.Service;
 
 @Service
 public class ContactService {
-	TreeMap<String,String> emailMap = new TreeMap<String,String>();
+	ArrayList<String> emailList = new ArrayList<String>();
 
 	public ArrayList<String> list() {
-		return new ArrayList<String>(emailMap.keySet());
+		Collections.sort(emailList);
+		return emailList;
 	}
 
 	public void add(String email) {
-		if (!emailMap.keySet().contains(email)) {
-				emailMap.put(email,"");
+		if (!emailList.contains(email)) {
+				emailList.add(email);
 		}
-	}
-
-	public TreeMap<String, String> attributeMap() {
-		return emailMap;
 	}
 
 }
