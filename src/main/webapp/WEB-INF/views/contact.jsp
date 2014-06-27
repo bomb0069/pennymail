@@ -24,7 +24,7 @@
 		</tr>
 		<tr>
 			<td>Recipients List</td>
-			<td colspan="2"><textarea size="10" style="width: 200px;">
+			<td colspan="2"><textarea id="currentRecipientsList" size="10" style="width: 200px;">
 <c:forEach items="${contactList}" var="contactName">${contactName}
 </c:forEach>
 			</textarea>
