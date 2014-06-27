@@ -3,31 +3,76 @@
 <html>
 <head>
 <title>Admin</title>
+<style type="text/css">
+body {
+	font-family: Arial;
+	background-color: #eee;
+}
+
+#title {
+	color: #fff;
+	padding: 10px;
+	background: #000;
+}
+
+#add {
+	border-radius: 5px;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border: 1px solid #DBDBDB;
+	background: #6A9FD4;
+	padding: 6px 20px;
+	color: #fff;
+	margin: 20px 0 0 20px;
+}
+#recipientBox {
+	padding: 10px;
+	border-bottom: 1px solid #ccc;
+}
+#recipientBox label,#topicBox label {
+	float: left;
+	width: 120px;
+}
+#recipientBox label {
+	margin-top: 25px;
+}
+#addRecipients {
+	width: 400px;
+	float: left;
+}
+.errorMsg {
+	padding-top: 10px;
+	clear: both;
+	color: red;
+}
+</style>
 </head>
 <body>
 	<form action="/pennymail/addrecipient" method="post">
-		<table>
-			<tr>
-				<td>Recipients</td>
-				<td><textarea id="addRecipients" name="addRecipients" rows="2"
-						cols="50"></textarea></td>
-				<td><input type="submit" id="add" value="ADD"></td>
-
-				<td><c:if test="${invalidList.size() > 0}">แสรดด e Penny โง่! invalid email: </c:if>
+		
+		<div id="addContactBox" style="margin: 20px auto; border: 1px solid #ccc; width: 700px; background-color: #fff;">	
+			<div id="title">Contact List</div>
+			<div id="recipientBox">
+				<label>Recipients</label>
+				<textarea id="addRecipients" name="addRecipients" rows="4" cols="50"></textarea>
+				<input type="submit" id="add" value="ADD">
+				<div class="errorMsg">
+					<c:if test="${invalidList.size() > 0}">แสรดด e Penny โง่! invalid email: </c:if>
 					<c:forEach items="${invalidList}" var="mail">
 				${mail}<br />
-					</c:forEach></td>
-			</tr>
-			<tr>
-				<td>Recipients List</td>
-				<td colspan="2"><textarea id="currentRecipientsList"
-						style="width: 200px;">
+					</c:forEach>
+				</div>
+			</div>
+			
+			<div id="recipientListBox" style="padding: 10px; border-bottom: 1px solid #ccc;">
+				<label>Recipients List</label>
+				<textarea id="currentRecipientsList" rows="20"
+						style="width: 100%;">
 <c:forEach items="${contactList}" var="contactName">${contactName}
 </c:forEach>
-			</textarea></td>
-				<td></td>
-			</tr>
-		</table>
+			</textarea>
+			</div>
+		</div>
 	</form>
 </body>
 </html>
