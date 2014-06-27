@@ -56,7 +56,7 @@ public class MailControllerTest {
 		
 		assertEquals(true, mailService.isSent());
 		assertEquals("sendmail", mav.getViewName());
-		List<String> errorList = (List<String>)mav.getModel().get("errorList");
+		List<?> errorList = (List<?>)mav.getModel().get("errorList");
 		assertEquals(0, errorList.size());
 		MailRequest mailRequest = (MailRequest)mav.getModel().get("mail");
 		assertEquals("", mailRequest.getTopic());
@@ -126,7 +126,7 @@ public class MailControllerTest {
 		assertEquals("valid@gmail.com",this.mailService.getRecipientAtIndex(0));
 		assertEquals("neung@gmail.com",this.mailService.getRecipientAtIndex(1));
 		assertEquals("sendmail", mav.getViewName());
-		List<String> errorList = (List<String>)mav.getModel().get("errorList");
+		List<?> errorList = (List<?>)mav.getModel().get("errorList");
 		assertEquals(0, errorList.size());
 	}	
 	private MailRequest buildMailRequest(String recipients,String topic,String message)
