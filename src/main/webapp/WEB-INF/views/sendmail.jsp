@@ -15,19 +15,18 @@ body {
 }
 
 #noTopicConfirmOverlay {
-	position: absolute;
+	position: relative;
+	top:-500px;
 	border: 1px solid #000;
 	padding: 10px;
 	width: 300px;
 	height: 200px;
 	background-color: #fff;
-	left: 100px;
-	top: 50px;
 	display: none;
+	margin: 0 auto;
 }
 
 #okBtn,#cancelBtn {
-	position: absolute;
 	bottom: 10px;
 }
 
@@ -102,9 +101,9 @@ span.errorMessage{
 </style>
 </head>
 <body>
-	<form id="sendMailForm" action="/pennymail/sendmail" method="post"
-		onsubmit="return onSubmitForm(document.getElementById('topic').value, showMessageBox)">
-		<div id="composeBox">
+	<div id="composeBox">
+		<form id="sendMailForm" action="/pennymail/sendmail" method="post"
+			onsubmit="return onSubmitForm(document.getElementById('topic').value, showMessageBox)">
 			<div id="title">Send Mail</div>
 			<div id="recipientsBox">
 				<label>RECIPIENTS</label>
@@ -130,9 +129,8 @@ span.errorMessage{
 			<div id="buttonPanel">
 				<input id="send" type="submit" value="SEND">
 			</div>
-		</div>
-	</form>
-
+		</form>
+	</div>
 	<div id="noTopicConfirmOverlay">
 		<h1>e Penny โง่ เดี๋ยวโดนแบนหรอก!</h1>
 		<button id="okBtn"
@@ -140,5 +138,6 @@ span.errorMessage{
 			เออกูโง่</button>
 		<button id="cancelBtn" onClick="onCancleButtonClick(hideMessageBox);">อุ้ยผิด</button>
 	</div>
+
 </body>
 </html>
