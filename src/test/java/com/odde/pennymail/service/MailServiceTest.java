@@ -43,12 +43,6 @@ public class MailServiceTest {
 	}
 	
 	@Test
-	public void nullBodyShouldBeSent() throws EmailException, IOException, MessagingException {
-		mailService.send("bomb@gmail.com", "New Gadgets", null);
-		assertEquals(" ", mailService.getSavedEmail().getMimeMessage().getContent());
-	}
-	
-	@Test
 	public void bccToPenny() throws EmailException, IOException, MessagingException {
 		mailService.send("bomb@gmail.com", "New Gadgets", "Sales 50% Off");
 		assertEquals("penny.inspectorgadget@gmail.com", mailService.getSavedEmail().getBccAddresses().get(0).getAddress());
@@ -67,7 +61,7 @@ public class MailServiceTest {
 		}
 	};
 	@Test
-	public void sendMailWithThaiInformationShould() throws EmailException, IOException, MessagingException {
+	public void sendMailWithThaiInformationShouldBeSent() throws EmailException, IOException, MessagingException {
 		final MyEmail email = new MyEmail();
 		MailService mailService = new MailService() {
 			protected SimpleEmail createEmail() {
