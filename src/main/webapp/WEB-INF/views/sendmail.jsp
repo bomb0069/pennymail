@@ -137,7 +137,7 @@ span.errorMessage{
 		<h1>e Penny โง่ เดี๋ยวโดนแบนหรอก!</h1>
 		<button id="okBtn" class="btn"
 			onClick="onOkButtonClick(document.getElementById('sendMailForm'))">OK
-			เออกูโง่</button>
+			กูโง่</button>
 		<button id="cancelBtn" class="btn" onClick="onCancleButtonClick(hideMessageBox);">อุ้ยผิด</button>
 	</div>
 
