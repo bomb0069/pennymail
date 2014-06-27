@@ -42,19 +42,21 @@ Fill in Recipients
     
 Recipients List Should Contain New Recipient
 	[Arguments]                     ${recipient}
-    ${recipient_list} =             Get List Items                     currentRecipientsList
-    Should Contain X Times          ${recipient_list}                  ${recipient}                   1    
+	Element Should Contain          currentRecipientsList      ${recipient}
+#    ${recipients} =                 Get Value                  currentRecipientsList
+#    ${recipient_list} =             Split String               ${recipients}                  \n
+#    Should Contain X Times          ${recipient_list}                  ${recipient}                   1    
 
+Invalid Email Should Not Be In The List
+    [Arguments]                     ${recipient}
+    ${recipient_list} =             Get Value                   currentRecipientsList
+    Should Not Contain              ${recipient_list}           ${recipient}                                                
+    
 Page Should No Error Message
     Page Should Not Contain         แสรดด e Penny โง่
     
 Error Message Is Shown
     Page Should Contain             แสรดด e Penny โง่
-    
-Invalid Email Should Not Be In The List
-    [Arguments]                     ${recipient}
-    ${recipient_list} =             Get List Items                     currentRecipientsList
-    Should Not Contain              ${recipient_list}                  ${recipient}                                                
     
 
     
