@@ -3,8 +3,6 @@
 <html>
 <head>
 <title>Admin</title>
-<script type="text/javascript"
-	src="<c:url value="/resources/js/contact.js" />"></script>
 </head>
 <body>
 
