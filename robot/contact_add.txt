@@ -21,8 +21,17 @@ Penny Add Several New Recipients Then The Recipients Should Be Added Into List
 	                             
 
 Penny Should See Error Message After Trying To Add Invalid Emails
-	[Template]     Add Invalid Recipients Workflow
-	#-----------------------------------------|
-	#                recipients               | 
-	#-----------------------------------------|
-      invalid.com
+    Add Invalid Recipients Workflow     invalid.com
+
+Penny Both Valid And Invalid Email Then Valid Email Should Be Added And See Invalid Email Error
+    [Tags]            now
+    Add Recipients      valid@email.com,invalid.com
+    Recipients List Should Contain New Recipient              valid@email.com
+    Invalid Email Should Not Be In The List                   invalid.com
+    Error Message Is Shown
+    
+    
+    
+    
+
+
