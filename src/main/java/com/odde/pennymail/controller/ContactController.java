@@ -2,7 +2,6 @@ package com.odde.pennymail.controller;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.TreeMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -24,9 +23,7 @@ public class ContactController {
 	public ModelAndView list() {
 		ModelAndView modelAndView = new ModelAndView("contact");
 		List<String> contactList = contactService.list();
-		TreeMap<String, String> emailAttributeMap = contactService.attributeMap();
 		modelAndView.getModel().put("contactList", contactList);
-		modelAndView.getModel().put("emailAttributeMap", emailAttributeMap);
 		return modelAndView;
 	}
 
@@ -61,6 +58,14 @@ public class ContactController {
 		return modelAndView;
 	}
 
-	
+	@RequestMapping(value = "/addattribute", method = RequestMethod.POST)
+	public ModelAndView addAttributeToContact(
+			@RequestParam(value = "email") String email, 
+			@RequestParam(value = "attribute") String attribute) {
+		
+		ModelAndView modelAndView = new ModelAndView("contact");
+		
+		return modelAndView;
+	}
 
 }

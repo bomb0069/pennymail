@@ -10,7 +10,7 @@ ${Contact_URL}     ${PENNYMAIL_URL}/contact
 Add Recipients Workflow
 	[Arguments]        ${recipients}
 	Add Recipients     ${recipients}
-	All Recipients Should Be Added Into List Without Errors
+	All Recipients Should Be Added Into List Without Errors             ${recipients}
 	
 Add Invalid Recipients Workflow
 	[Arguments]        ${recipients}
@@ -25,6 +25,7 @@ Add Recipients
 	Click Button          add
 	
 All Recipients Should Be Added Into List Without Errors
+	[Arguments]        ${recipients}
     Page Should No Error Message
     ${recipient_list} =     Split String    ${recipients}    ,
     ${length} =             Get Length      ${recipient_list}
@@ -41,19 +42,20 @@ Fill in Recipients
     
 Recipients List Should Contain New Recipient
 	[Arguments]                     ${recipient}
-    ${recipient_list} =             Get List Items                     currentRecipientsList
-    Should Contain X Times          ${recipient_list}                  ${recipient}                   1    
+    ${recipients} =                 Get Value                  currentRecipientsList
+    ${recipient_list} =             Split String               ${recipients}                  \n
+    Should Contain X Times          ${recipient_list}          ${recipient}                   1    
 
+Invalid Email Should Not Be In The List
+    [Arguments]                     ${recipient}
+    ${recipient_list} =             Get Value                   currentRecipientsList
+    Should Not Contain              ${recipient_list}           ${recipient}                                                
+    
 Page Should No Error Message
     Page Should Not Contain         แสรดด e Penny โง่
     
 Error Message Is Shown
     Page Should Contain             แสรดด e Penny โง่
-    
-Invalid Email Should Not Be In The List
-    [Arguments]                     ${recipient}
-    ${recipient_list} =             Get List Items                     currentRecipientsList
-    Should Not Contain              ${recipient_list}                  ${recipient}                                                
     
 
     

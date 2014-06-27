@@ -15,6 +15,7 @@ Penny Add Several New Recipients Then The Recipients Should Be Added Into List
       valid@email.com
 	  abc123@hotmail.com
       multiple@a.com,Roong@hotmail.com
+      1@hotmail.com,11@hotmail.com
       nueng@hotmail.com,nueng@hotmail.com  
 		
 	                             

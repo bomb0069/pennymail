@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class EmailTokenizer {
 	
-	private String delims = ",";
+	private String delims = ",|\\n";
 
 	public String[] splitEmail(String mail){
 		String[] mails = mail.split(delims);
