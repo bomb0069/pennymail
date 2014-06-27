@@ -24,13 +24,11 @@
 		</tr>
 		<tr>
 			<td>Recipients List</td>
-			<td colspan="2"><select id="currentRecipientsList"
-				multiple="multiple">
-					<c:forEach items="${contactList}" var="contactName">
-						<option value='${contactName}'
-							onclick='showAttribute(document, {"email": "${contactName}", "attributes": [{"key": "Firstname", "value": "${contactName}"}]})'>${contactName}</option>
-					</c:forEach>
-			</select></td>
+			<td colspan="2"><textarea size="10" style="width: 200px;">
+<c:forEach items="${contactList}" var="contactName">${contactName}
+</c:forEach>
+			</textarea>
+		</td>
 			<td><form method="POST" action="saveAttributes"
 					id="contact-attributes"></form></td>
 		</tr>
