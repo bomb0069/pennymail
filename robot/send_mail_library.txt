@@ -60,12 +60,25 @@ Penny Should See Message
 Recipient Should Receive New Mail
     [Arguments]           ${topic}     ${mail_count}
     
-    # wait 5 seconds for mail to be delivered
-    Sleep                                5 seconds
+    Wait For Mail To Be Delivered
     
     Open Mail Box
     Should Receive New Mail      ${topic}     ${mail_count}
     Close Mail Box
+    
+Recipient Should Receive New Mail With Body  
+    [Arguments]           ${topic}     ${body}
+    
+    Wait For Mail To Be Delivered
+    
+    Open Mail Box
+    ${actual_body} =    Get Mail Body By Mail Topic    ${topic}
+    Close Mail Box
+    
+    Should Be Equal    ${actual_body}    ${body}
+    
+Wait For Mail To Be Delivered
+    Sleep    2 seconds
 
 Penny Should Not See Message
 	[Arguments]                     ${message}
