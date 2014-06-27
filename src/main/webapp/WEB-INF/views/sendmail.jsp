@@ -84,7 +84,7 @@ body {
 	background-color: #fff;
 }
 
-#send {
+.btn {
 	border-radius: 5px;
 	-moz-border-radius: 5px;
 	-webkit-border-radius: 5px;
@@ -93,6 +93,8 @@ body {
 	padding: 6px 20px;
 	color: #fff;
 }
+
+
 
 span.errorMessage{
 	color: red;
@@ -127,16 +129,16 @@ span.errorMessage{
 			</div>
 
 			<div id="buttonPanel">
-				<input id="send" type="submit" value="SEND">
+				<input id="send" class="btn" type="submit" value="SEND">
 			</div>
 		</form>
 	</div>
 	<div id="noTopicConfirmOverlay">
 		<h1>e Penny โง่ เดี๋ยวโดนแบนหรอก!</h1>
-		<button id="okBtn"
+		<button id="okBtn" class="btn"
 			onClick="onOkButtonClick(document.getElementById('sendMailForm'))">OK
 			เออกูโง่</button>
-		<button id="cancelBtn" onClick="onCancleButtonClick(hideMessageBox);">อุ้ยผิด</button>
+		<button id="cancelBtn" class="btn" onClick="onCancleButtonClick(hideMessageBox);">อุ้ยผิด</button>
 	</div>
 
 </body>
