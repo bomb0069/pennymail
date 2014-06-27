@@ -29,8 +29,7 @@ public class ContactServiceTest {
 	public void shouldBeAbleToAddMultipleContacts() {
 		contact.add("a@mail.com");
 		contact.add("b@mail.com");
-		contact.add("c@mail.com");
-		assertEquals("cannot add multiple contact", 3, contact.list().size());
+		assertEquals("cannot add multiple contact", 2, contact.list().size());
 	}
 
 	@Test
@@ -50,7 +49,6 @@ public class ContactServiceTest {
 	public void duplicateContacts() {
 		contact.add("a@mail.com");
 		contact.add("a@mail.com");
-		contact.add("b@mail.com");
-		assertEquals("cannot add multiple contact", 2, contact.list().size());
+		assertEquals("cannot add multiple contact", 1, contact.list().size());
 	}
 }
