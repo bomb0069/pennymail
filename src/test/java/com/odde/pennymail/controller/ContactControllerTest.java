@@ -33,14 +33,13 @@ public class ContactControllerTest {
 
 	@Test
 	public void addEmail() {
-		ArrayList<String> oldContactList = (ArrayList<String>) service.list()
-				.clone();
+		ArrayList<String> contactList = (ArrayList<String>) service.list();
+		int expectedContactCount = contactList.size() + 1;
 		ModelAndView modelAndView = controller.add("new@email.com");
 
 		assertEquals("contact", modelAndView.getViewName());
-		ArrayList<String> newContactList = (ArrayList<String>) modelAndView
-				.getModel().get("contactList");
-		assertEquals(oldContactList.size() + 1, newContactList.size());
+		contactList = (ArrayList<String>) service.list();
+		assertEquals(expectedContactCount, contactList.size());
 
 	}
 
