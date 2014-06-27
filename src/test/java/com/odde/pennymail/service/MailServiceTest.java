@@ -55,10 +55,7 @@ public class MailServiceTest {
 			this.buildMimeMessage();
 			return "";
 		}
-
-		public String getCharset() throws EmailException {
-			return this.charset;
-		}
+		
 	};
 	@Test
 	public void sendMailWithThaiInformationShouldBeSent() throws EmailException, IOException, MessagingException {
